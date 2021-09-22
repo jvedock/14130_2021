@@ -35,10 +35,10 @@ public class Point{
      *
      * @param p1 the starting point point
      * @param p2 the destination point
-     * @return the angle between two points in degrees
+     * @return the angle between two points in radians
      */
     public static double getAngle(Point p1, Point p2){
-        double angle = Math.toDegrees(Math.atan2((p2.x-p1.x), (p2.y-p1.y)));
+        double angle = Math.atan2(p2.x-p1.x, p2.y-p1.y);
         angle += 90;
         if(angle < 0){
             angle += 360;
