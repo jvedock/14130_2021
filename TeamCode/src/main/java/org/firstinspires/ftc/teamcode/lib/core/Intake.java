@@ -34,4 +34,18 @@ public class Intake {
         motor1.setDirection(direction);
         motor2.setDirection(direction);
     }
+
+    public void getVelocity(int velocity){
+        motor1.getVelocity();
+        motor2.getVelocity();
+    }
+
+    /**
+     *
+     * @param direction the intended direction of the motor
+     */
+    public void getDirection(DcMotorSimple.Direction direction){
+        motor1.getDirection();
+        motor2.getDirection();
+    }
 }
