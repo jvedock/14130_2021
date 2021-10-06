@@ -16,7 +16,7 @@ public class Intake {
 
 
 
-    /************ Setters and Getters ************/
+    /****************************** Setters and Getters ******************************/
 
     /**
      *
@@ -48,7 +48,10 @@ public class Intake {
     }
 
 
-
+    /**
+     * a function to get the direction of the intake
+     * @return will return the direction of motor1, motor two will be the oposite
+     */
     public DcMotorSimple.Direction getDirection(){
         return direction;
     }
