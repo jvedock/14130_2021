@@ -18,4 +18,5 @@ public class StandardTrajectory {
         this.angle = Point.getAngle(origin, destination);
         this.distance = Point.getDistance(origin, destination);
     }
+
 }

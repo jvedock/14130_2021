@@ -1,16 +1,18 @@
 package org.firstinspires.ftc.teamcode.lib.core;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import static org.firstinspires.ftc.teamcode.lib.DATA.*;
 
 import org.firstinspires.ftc.teamcode.lib.nav.Point;
 import org.firstinspires.ftc.teamcode.lib.nav.StandardTrajectory;
 
 public class BotCore{
-    private DcMotor leftFront, rightFront, leftRear, rightRear;
-    private double leftFrontPower, leftRearPower, rightFrontPower, rightRearPower;
+    private DcMotorEx leftFront, rightFront, leftRear, rightRear;
+    public double leftFrontPower, leftRearPower, rightFrontPower, rightRearPower;
 
-    public BotCore(DcMotor leftFront, DcMotor rightFront, DcMotor leftRear, DcMotor rightRear) {
+    public BotCore(DcMotorEx leftFront, DcMotorEx rightFront, DcMotorEx leftRear, DcMotorEx rightRear) {
         this.leftFront = leftFront;
         this.rightFront = rightFront;
         this.leftRear = leftRear;
@@ -24,17 +26,26 @@ public class BotCore{
      * @param trajectory the trajectory for the robot to move along
      */
     public void move(StandardTrajectory trajectory, double magnitude){
-        rightFrontPower = Math.sin(trajectory.angle-(0.25*Math.PI))*magnitude*DRIVE_SPEED_MODIFIER;
+        rightFrontPower = Math.sin((trajectory.angle)-(0.25*Math.PI))*magnitude*DRIVE_SPEED_MODIFIER;
+
+        leftFrontPower = Math.sin(trajectory.angle+(0.25*Math.PI))*magnitude*DRIVE_SPEED_MODIFIER;
+        double modifier = 1/Math.max(leftFrontPower, rightFrontPower);
+
+        rightFrontPower *= modifier;
+        leftFrontPower *= -modifier;
         leftRearPower = -rightFrontPower;
-        leftFrontPower = -Math.sin(trajectory.angle+(0.25*Math.PI))*magnitude*DRIVE_SPEED_MODIFIER;
         rightRearPower = -leftFrontPower;
 
 
 
         leftFront.setPower(leftFrontPower);
+
         leftRear.setPower(leftRearPower);
+
         rightFront.setPower(rightFrontPower);
+
         rightRear.setPower(rightRearPower);
+
 
     }
 

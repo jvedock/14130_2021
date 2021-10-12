@@ -38,12 +38,17 @@ public class Point{
      * @return the angle between two points in radians
      */
     public static double getAngle(Point p1, Point p2){
-        double angle = Math.atan2(p2.x-p1.x, p2.y-p1.y);
-        angle += 90;
-        if(angle < 0){
-            angle += 360;
+        double angle = (Math.atan2(p2.y-p1.y, p2.x-p1.x));
+        angle -= Math.PI/2;
+        if(angle > (2*Math.PI)){
+            angle -= (2*Math.PI);
         }
-        return angle;
+        else if(angle < 0){
+            angle = +(2*Math.PI);
+        }
+
+
+        return (angle);
     }
 
 
