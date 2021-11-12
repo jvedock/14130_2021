@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.lib.core;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class Intake {
     private DcMotorEx motor1, motor2;
@@ -16,17 +17,21 @@ public class Intake {
 
 
 
-    /************ Setters and Getters ************/
+    /****************************** Setters and Getters ******************************/
 
     /**
      *
-     * @param velocity the target velocity of the motor, in ticks per second
+     * @param go the target velocity of the motor, in ticks per second
      */
-    public void setVelocity(int velocity){
-        this.velocity = velocity;
-        motor1.setVelocity(velocity);
-        motor2.setVelocity(velocity);
+
+
+    public void setGo(int go){
+        this.velocity = go;
+        motor1.setPower(go);
+        motor2.setPower(go);
     }
+
+
 
     /**
      *
@@ -48,7 +53,10 @@ public class Intake {
     }
 
 
-
+    /**
+     * a function to get the direction of the intake
+     * @return will return the direction of motor1, motor two will be the oposite
+     */
     public DcMotorSimple.Direction getDirection(){
         return direction;
     }
