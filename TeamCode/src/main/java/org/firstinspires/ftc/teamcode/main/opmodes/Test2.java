@@ -32,14 +32,13 @@ package org.firstinspires.ftc.teamcode.main.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.lib.core.BotCore;
 import org.firstinspires.ftc.teamcode.lib.core.Intake;
-import org.firstinspires.ftc.teamcode.lib.core.controlTheory.LiftP;
 import org.firstinspires.ftc.teamcode.lib.core.hardware.Lift;
 import org.firstinspires.ftc.teamcode.lib.nav.Point;
 import org.firstinspires.ftc.teamcode.lib.nav.StandardTrajectory;
@@ -61,9 +60,9 @@ import static org.firstinspires.ftc.teamcode.lib.DATA.*;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="TestOpMode", group="Linear Opmode")
+@TeleOp(name="Test2", group="Linear Opmode")
 
-public class TestOpmode extends LinearOpMode {
+public class Test2 extends LinearOpMode {
 
     // Declare OpMode members.
 
@@ -72,60 +71,50 @@ public class TestOpmode extends LinearOpMode {
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        DcMotorEx leftFront, leftRear, rightFront, rightRear, intake1, intake2, liftMotor;
-        Servo outtakeServo;
-        AnalogInput liftInput;
-
+        DcMotorEx leftFront, leftRear, rightFront, rightRear;
 
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
         rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        intake1 = hardwareMap.get(DcMotorEx.class, "intake1");
-        intake2 = hardwareMap.get(DcMotorEx.class, "intake2");
-        liftMotor = hardwareMap.get(DcMotorEx.class, "liftMotor");
-        outtakeServo = hardwareMap.get(Servo.class, "outtakeServo");
-        liftInput = hardwareMap.get(AnalogInput.class, "liftInput");
-
-        BotCore bot = new BotCore(leftFront, rightFront, leftRear, rightRear, gamepad1);
-        Intake intake = new Intake(intake1, intake2);
-        Lift lift = new Lift(outtakeServo, liftMotor, liftInput);
-
-        LiftP liftP = new LiftP(liftMotor, liftInput);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
         while(opModeIsActive()){
-            StandardTrajectory traj = new StandardTrajectory(new Point(GAMEFIELD, 0, 0), new Point(GAMEFIELD, gamepad1.left_stick_x, gamepad1.left_stick_y), GAMEFIELD);
-            bot.move(traj, Math.sqrt(Math.pow(gamepad1.left_stick_x, 2)+Math.pow(gamepad1.left_stick_y, 2)));
-            if (gamepad1.left_bumper && !gamepad1.right_bumper) {
-                intake.setGo(1);
-            }
-            else if (!gamepad1.left_bumper && gamepad1.right_bumper){
-                intake.setGo(-1);
+            if (gamepad1.a){
+                leftFront.setPower(1);
+                telemetry.addData("left front", true);
             }
             else{
-                intake.setGo(0);
+                leftFront.setPower(0);
+                telemetry.addData("left front", false);
             }
-            if(gamepad1.a) {
-                lift.open();
-
+            if (gamepad1.b){
+                leftRear.setPower(1);
+                telemetry.addData("left rear", true);
             }
             else{
-                lift.close();
+                leftRear.setPower(0);
+                telemetry.addData("left rear", false);
             }
-
             if (gamepad1.x){
-                liftP.setUp();
+                rightFront.setPower(1);
+                telemetry.addData("Right Front", true);
             }
-            else if (gamepad1.b){
-                liftP.setDown();
+            else{
+                rightFront.setPower(0);
+                telemetry.addData("right front", false);
             }
-            liftP.run();
-
-            telemetry.addData("Lift Angle", liftP.getAngle());
-            telemetry.addData("Expected Angle", liftP.getTargetAngle());
-            telemetry.addData("Lift Motor Power", liftP.getPower());
+            if (gamepad1.y){
+                rightRear.setPower(1);
+                telemetry.addData("Right Rear", true);
+            }
+            else{
+                rightRear.setPower(0);
+                telemetry.addData("right rear", false);
+            }
             telemetry.update();
         }
     }

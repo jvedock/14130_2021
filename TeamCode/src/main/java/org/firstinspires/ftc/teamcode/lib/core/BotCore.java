@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.lib.core;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import static org.firstinspires.ftc.teamcode.lib.DATA.*;
 
@@ -11,12 +14,15 @@ import org.firstinspires.ftc.teamcode.lib.nav.StandardTrajectory;
 public class BotCore{
     private DcMotorEx leftFront, rightFront, leftRear, rightRear;
     public double leftFrontPower, leftRearPower, rightFrontPower, rightRearPower;
+    Gamepad gamepad1;
+    double driveMod = 1;
 
-    public BotCore(DcMotorEx leftFront, DcMotorEx rightFront, DcMotorEx leftRear, DcMotorEx rightRear) {
+    public BotCore(DcMotorEx leftFront, DcMotorEx rightFront, DcMotorEx leftRear, DcMotorEx rightRear, Gamepad gamepad) {
         this.leftFront = leftFront;
         this.rightFront = rightFront;
         this.leftRear = leftRear;
         this.rightRear = rightRear;
+        this.gamepad1 = gamepad;
     }
 
     /**
@@ -26,25 +32,42 @@ public class BotCore{
      * @param trajectory the trajectory for the robot to move along
      */
     public void move(StandardTrajectory trajectory, double magnitude){
+        /*
         rightFrontPower = Math.sin((trajectory.angle)-(0.25*Math.PI))*magnitude*DRIVE_SPEED_MODIFIER;
 
         leftFrontPower = Math.sin(trajectory.angle+(0.25*Math.PI))*magnitude*DRIVE_SPEED_MODIFIER;
         double modifier = 1/Math.max(leftFrontPower, rightFrontPower);
 
-        rightFrontPower *= modifier;
-        leftFrontPower *= -modifier;
+        rightFrontPower *= -modifier;
+        leftFrontPower *= modifier;
         leftRearPower = -rightFrontPower;
         rightRearPower = -leftFrontPower;
+        */
+        leftFrontPower = gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x;
+        rightRearPower = gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x;
+        leftRearPower = gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x;
+        rightFrontPower = gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x;
 
+        /*
+        if (gamepad1.left_stick_button){
+            leftFrontPower = 0;
+            leftRearPower = 0;
+            rightFrontPower = 0;
+            rightRearPower = 0;
+        }
 
+         */
 
-        leftFront.setPower(leftFrontPower);
+        if(gamepad1.left_trigger>0.05){
+            driveMod = Math.abs(1-(gamepad1.left_trigger+0.25));
+        }
+        leftFront.setPower(-leftFrontPower*driveMod);
 
-        leftRear.setPower(leftRearPower);
+        leftRear.setPower(-leftRearPower*driveMod);
 
-        rightFront.setPower(rightFrontPower);
+        rightFront.setPower(rightFrontPower*driveMod);
 
-        rightRear.setPower(rightRearPower);
+        rightRear.setPower(rightRearPower*driveMod);
 
 
     }
