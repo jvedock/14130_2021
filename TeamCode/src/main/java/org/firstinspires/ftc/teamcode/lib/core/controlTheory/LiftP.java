@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.lib.core.hardware.Lift;
 
-public class LiftP {
+public class LiftP extends Thread{
     public DcMotorEx motor;
     private AnalogInput input;
     private double expected;
@@ -21,6 +21,7 @@ public class LiftP {
         this.input = input;
         this.expected = down;
     }
+    
     public void run(){
         actual = input.getVoltage()*(360/3.3);
         power = (actual-expected)*P;
