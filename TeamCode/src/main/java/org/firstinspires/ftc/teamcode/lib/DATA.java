@@ -24,6 +24,8 @@ public class DATA{
     //distance between parallel odometry wheels
     public static final double LATERAL_DISTANCE = 5;
     public static final double FORWARD_OFFSET = 5;
+
+    public static final double CLICKS_PER_ROTATION = 537.6;
     /****************** VARIABLES ******************/
 
     //the speed modifier for the bot
@@ -32,7 +34,10 @@ public class DATA{
     public static double ROTATION = 0;
 
     /****************** MODES ******************/
-    public static boolean ODOMETRY_MODE = true;
+    public static boolean ODOMETRY_MODE = false;
+
+
+    public static double CURRENT_BOT_ANGLE = 0;
 
 
 

@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.AnalogInput;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -41,6 +42,7 @@ import org.firstinspires.ftc.teamcode.lib.core.BotCore;
 import org.firstinspires.ftc.teamcode.lib.core.Intake;
 import org.firstinspires.ftc.teamcode.lib.core.controlTheory.LiftP;
 import org.firstinspires.ftc.teamcode.lib.core.hardware.Lift;
+import org.firstinspires.ftc.teamcode.lib.core.hardware.MagnetArm;
 import org.firstinspires.ftc.teamcode.lib.nav.Point;
 import org.firstinspires.ftc.teamcode.lib.nav.StandardTrajectory;
 
@@ -73,7 +75,8 @@ public class TestOpmode extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         DcMotorEx leftFront, leftRear, rightFront, rightRear, intake1, intake2, liftMotor;
-        Servo outtakeServo;
+        Servo outtakeServo, magnetArm, magnetRemoval;
+        CRServo turntable;
         AnalogInput liftInput;
 
 
@@ -86,18 +89,22 @@ public class TestOpmode extends LinearOpMode {
         liftMotor = hardwareMap.get(DcMotorEx.class, "liftMotor");
         outtakeServo = hardwareMap.get(Servo.class, "outtakeServo");
         liftInput = hardwareMap.get(AnalogInput.class, "liftInput");
+        turntable = hardwareMap.get(CRServo.class, "turntable");
+        magnetArm = hardwareMap.get(Servo.class, "magnetArm");
+        magnetRemoval = hardwareMap.get(Servo.class, "magnetRemoval");
 
-        BotCore bot = new BotCore(leftFront, rightFront, leftRear, rightRear, gamepad1);
+        BotCore bot = new BotCore(leftFront, rightFront, leftRear, rightRear, gamepad1, turntable);
         Intake intake = new Intake(intake1, intake2);
         Lift lift = new Lift(outtakeServo, liftMotor, liftInput);
 
         LiftP liftP = new LiftP(liftMotor, liftInput);
-
+        MagnetArm magArm = new MagnetArm(magnetArm, magnetRemoval);
         waitForStart();
-
+        magnetRemoval.setPosition(0.5);
+        magnetArm.setPosition(0.75);
         while(opModeIsActive()){
             StandardTrajectory traj = new StandardTrajectory(new Point(GAMEFIELD, 0, 0), new Point(GAMEFIELD, gamepad1.left_stick_x, gamepad1.left_stick_y), GAMEFIELD);
-            bot.move(traj, Math.sqrt(Math.pow(gamepad1.left_stick_x, 2)+Math.pow(gamepad1.left_stick_y, 2)));
+            bot.move();
             if (gamepad1.left_bumper && !gamepad1.right_bumper) {
                 intake.setGo(1);
             }
@@ -115,14 +122,41 @@ public class TestOpmode extends LinearOpMode {
                 lift.close();
             }
 
-            if (gamepad1.x){
+            if (gamepad2.y){
                 liftP.setUp();
             }
-            else if (gamepad1.b){
+            else if (gamepad2.b){
                 liftP.setDown();
             }
+            else if(gamepad2.x){
+                liftP.setMiddle();
+            }
+            else if (gamepad2.a){
+                liftP.setBottom();
+            }
             liftP.run();
+            if (gamepad2.left_bumper){
+                bot.setTurntablePower(-1);
+            }
+            else if (gamepad2.right_bumper){
+                bot.setTurntablePower(1);
+            }
+            else{
+                bot.setTurntablePower(0);
+            }
 
+            if (gamepad1.x){
+                magArm.drop();
+            }
+            if(gamepad1.dpad_down){
+                magArm.lower();
+            }
+            else if (gamepad1.dpad_up){
+                magArm.raise();
+            }
+            else if (gamepad1.dpad_left){
+                magArm.dropHeight();
+            }
             telemetry.addData("Lift Angle", liftP.getAngle());
             telemetry.addData("Expected Angle", liftP.getTargetAngle());
             telemetry.addData("Lift Motor Power", liftP.getPower());

@@ -1,37 +1,38 @@
 package org.firstinspires.ftc.teamcode.lib.core;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import static org.firstinspires.ftc.teamcode.lib.DATA.*;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.lib.nav.Point;
 import org.firstinspires.ftc.teamcode.lib.nav.StandardTrajectory;
 
 public class BotCore{
     private DcMotorEx leftFront, rightFront, leftRear, rightRear;
+    private CRServo turntableServo;
     public double leftFrontPower, leftRearPower, rightFrontPower, rightRearPower;
     Gamepad gamepad1;
     double driveMod = 1;
 
-    public BotCore(DcMotorEx leftFront, DcMotorEx rightFront, DcMotorEx leftRear, DcMotorEx rightRear, Gamepad gamepad) {
+
+    public BotCore(DcMotorEx leftFront, DcMotorEx rightFront, DcMotorEx leftRear, DcMotorEx rightRear, Gamepad gamepad, CRServo turntable) {
         this.leftFront = leftFront;
         this.rightFront = rightFront;
         this.leftRear = leftRear;
         this.rightRear = rightRear;
         this.gamepad1 = gamepad;
+        this.turntableServo = turntable;
     }
 
-    /**
-     * This function will set the robot to move along the angle of given trajectory
-     *
-     * @param magnitude the magnitude multiplier of the bot's speed
-     * @param trajectory the trajectory for the robot to move along
-     */
-    public void move(StandardTrajectory trajectory, double magnitude){
+
+    public void move(/*StandardTrajectory trajectory, double magnitude*/){
         /*
         rightFrontPower = Math.sin((trajectory.angle)-(0.25*Math.PI))*magnitude*DRIVE_SPEED_MODIFIER;
 
@@ -79,6 +80,10 @@ public class BotCore{
      */
     public void moveToPoint(Point destination, double magnitude){
 
-        move(new StandardTrajectory(POSITION, destination, GAMEFIELD), magnitude);
+        //move(new StandardTrajectory(POSITION, destination, GAMEFIELD), magnitude);
+    }
+
+    public void setTurntablePower(double power){
+        turntableServo.setPower(power);
     }
 }

@@ -12,10 +12,12 @@ public class LiftP extends Thread{
     private double actual;
     public double power;
     private final double up = 210;
-    private final double down = 87;
+    private final double down = 89;
+    private final double middle = 238;
+    private final double bottom = 274;
 
 
-    public double P = (0.03);
+    public double P = (0.02);
     public LiftP(DcMotorEx motor, AnalogInput input){
         this.motor = motor;
         this.input = input;
@@ -52,4 +54,8 @@ public class LiftP extends Thread{
     public void setDown(){
         expected = down;
     }
+    public void setMiddle(){expected = middle;}
+    public void setBottom(){expected = bottom;}
+
+
 }
