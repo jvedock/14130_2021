@@ -105,7 +105,7 @@ public class AutoTest extends LinearOpMode {
 
          */
 
-        move(bot, 0, 100, 0.3, motors);
+        move(0, 100, 0.3, motors);
         /*
         leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -119,7 +119,7 @@ public class AutoTest extends LinearOpMode {
     }
     }
 
-    public void move(AutoBotCore bot, double angle, double distance, double speedMod, DcMotorEx[] motors){
+    public void move(double angle, double distance, double speedMod, DcMotorEx[] motors){
         int lfPos, lrPos, rfPos, rrPos;
         motors[0].setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motors[1].setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
