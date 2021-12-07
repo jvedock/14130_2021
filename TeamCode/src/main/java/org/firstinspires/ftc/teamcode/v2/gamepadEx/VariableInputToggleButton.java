@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.v2.gamepadEX;
+package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
 public class VariableInputToggleButton {
     VariableInputButton button;
@@ -10,7 +10,7 @@ public class VariableInputToggleButton {
     }
 
     private boolean getRise(){
-        boolean currentState = button.pressed();
+        boolean currentState = button.get();
         if(currentState && !lastState){
             lastState = currentState;
             return true;
@@ -20,7 +20,7 @@ public class VariableInputToggleButton {
     }
 
     private boolean getFall(){
-        boolean currentState = button.pressed();
+        boolean currentState = button.get();
         if(!currentState && lastState){
             lastState = currentState;
             return true;
@@ -29,7 +29,7 @@ public class VariableInputToggleButton {
         return false;
     }
 
-    public boolean getState(){
+    public boolean get(){
         if (getRise()){
             state = !state;
         }

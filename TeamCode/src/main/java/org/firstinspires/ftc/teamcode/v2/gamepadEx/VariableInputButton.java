@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.v2.gamepadEX;
+package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
 public class VariableInputButton {
 
@@ -10,8 +10,8 @@ public class VariableInputButton {
         this.threshold = threshold;
     }
 
-    public boolean pressed(){
-        if(Math.abs(input.getPosition())>threshold){
+    public boolean get(){
+        if(Math.abs(input.get())>threshold){
             return true;
         }
         return false;

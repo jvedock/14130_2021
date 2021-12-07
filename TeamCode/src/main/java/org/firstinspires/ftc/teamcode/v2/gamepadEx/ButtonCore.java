@@ -5,7 +5,7 @@ Note: This is heavily based on the betterGamepad of team 9929,
  TODO: copy over their copyright notice
  */
 
-package org.firstinspires.ftc.teamcode.v2.gamepadEX;
+package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
 public class ButtonCore {
     private final StandardButton button;
@@ -15,11 +15,11 @@ public class ButtonCore {
     public ButtonCore(StandardButton button){
         this.button = button;
 
-        this.last = button.pressed();
+        this.last = button.get();
     }
 
     public boolean getRise(){
-        boolean currentState = button.pressed();
+        boolean currentState = button.get();
 
         if (currentState && !last){
             last = true;
@@ -30,7 +30,7 @@ public class ButtonCore {
         return false;
     }
     public boolean getFall(){
-        boolean currentState = button.pressed();
+        boolean currentState = button.get();
 
         if (!currentState && last){
             last = true;
