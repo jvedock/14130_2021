@@ -11,7 +11,7 @@ public class VariableInputButton {
     }
 
     public boolean get(){
-        if(Math.abs(input.get())>threshold){
+        if(Math.abs(input.get())>Math.abs(threshold)){
             return true;
         }
         return false;

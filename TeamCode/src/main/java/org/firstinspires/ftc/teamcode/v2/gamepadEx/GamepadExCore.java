@@ -37,7 +37,7 @@ public class GamepadExCore {
     }
     // Buttons
 
-    public ToggleButton getAButtonToggled(){
+    public ToggleButton getAButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -78,7 +78,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getBButtonToggled(){
+    public ToggleButton getBButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -119,7 +119,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getBackButtonToggled(){
+    public ToggleButton getBackButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -160,7 +160,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getDpad_DownButtonToggled(){
+    public ToggleButton getDpad_DownButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -201,7 +201,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getDpad_UpButtonToggled(){
+    public ToggleButton getDpad_UpButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -242,7 +242,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getDpad_LeftButtonToggled(){
+    public ToggleButton getDpad_LeftButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -283,7 +283,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getDpad_RightButtonToggled(){
+    public ToggleButton getDpad_RightButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -324,7 +324,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getXButtonToggled(){
+    public ToggleButton getXButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -365,7 +365,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getYButtonToggled(){
+    public ToggleButton getYButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -406,7 +406,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getLeftBumperButtonToggled(){
+    public ToggleButton getLeft_BumperButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -427,7 +427,7 @@ public class GamepadExCore {
 
 
     }
-    public StandardButton getLeftBumperButton() {
+    public StandardButton getLeft_BumperButton() {
         return new StandardButton() {
             private ButtonCore button;
 
@@ -447,7 +447,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getRightBumperButtonToggled(){
+    public ToggleButton getRight_BumperButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -468,7 +468,7 @@ public class GamepadExCore {
 
 
     }
-    public StandardButton getRightBumperButton() {
+    public StandardButton getRight_BumperButton() {
         return new StandardButton() {
             private ButtonCore button;
 
@@ -488,7 +488,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getLeftStickButtonButtonToggled(){
+    public ToggleButton getLeft_Stick_ButtonButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -509,7 +509,7 @@ public class GamepadExCore {
 
 
     }
-    public StandardButton getLeftStickButtonButton() {
+    public StandardButton getLeft_Stick_ButtonButton() {
         return new StandardButton() {
             private ButtonCore button;
 
@@ -529,7 +529,7 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getRightStickButtonButtonToggled(){
+    public ToggleButton getRight_Stick_ButtonButtonToggle(){
         return new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
@@ -550,7 +550,7 @@ public class GamepadExCore {
 
 
     }
-    public StandardButton getRightStickButtonButton() {
+    public StandardButton getRight_Stick_ButtonButton() {
         return new StandardButton() {
             private ButtonCore button;
 
@@ -579,7 +579,7 @@ public class GamepadExCore {
             }
         };
     }
-    public VariableInput getLeftStickY(){
+    public VariableInput getLeft_Stick_Y(){
         return new VariableInput() {
             @Override
             public float get() {
@@ -588,7 +588,7 @@ public class GamepadExCore {
         };
     }
 
-    public VariableInput getRightStickX(){
+    public VariableInput getRight_Stick_X(){
         return new VariableInput() {
             @Override
             public float get() {
@@ -596,7 +596,7 @@ public class GamepadExCore {
             }
         };
     }
-    public VariableInput getRightStickY(){
+    public VariableInput getRight_Stick_Y(){
         return new VariableInput() {
             @Override
             public float get() {
@@ -605,7 +605,7 @@ public class GamepadExCore {
         };
     }
 
-    public VariableInput getLeftTrigger(){
+    public VariableInput getLeft_Trigger(){
         return new VariableInput() {
             @Override
             public float get() {
@@ -613,7 +613,7 @@ public class GamepadExCore {
             }
         };
     }
-    public VariableInput getRightTrigger(){
+    public VariableInput getRight_Trigger(){
         return new VariableInput() {
             @Override
             public float get() {
@@ -624,48 +624,48 @@ public class GamepadExCore {
 
     //variable input buttons
 
-    public VariableInputButton getLeftStickXButton(double threshold){
+    public VariableInputButton getLeft_Stick_XButton(double threshold){
         return new VariableInputButton(getLeftStickX(), threshold);
     }
-    public VariableInputButton getLeftStickYButton(double threshold){
-        return new VariableInputButton(getLeftStickY(), threshold);
+    public VariableInputButton getLeft_Stick_YButton(double threshold){
+        return new VariableInputButton(getLeft_Stick_Y(), threshold);
     }
 
-    public VariableInputButton getRightStickXButton(double threshold){
-        return new VariableInputButton(getRightStickX(), threshold);
+    public VariableInputButton getRight_Stick_XButton(double threshold){
+        return new VariableInputButton(getRight_Stick_X(), threshold);
     }
-    public VariableInputButton getRightStickYButton(double threshold){
-        return new VariableInputButton(getRightStickY(), threshold);
+    public VariableInputButton getRight_Stick_YButton(double threshold){
+        return new VariableInputButton(getRight_Stick_Y(), threshold);
     }
 
-    public VariableInputButton getLeftTriggerButton(double threshold){
-        return new VariableInputButton(getLeftTrigger(), threshold);
+    public VariableInputButton getLeft_TriggerButton(double threshold){
+        return new VariableInputButton(getLeft_Trigger(), threshold);
     }
-    public VariableInputButton getRightTriggerButton(double threshold){
-        return new VariableInputButton(getRightTrigger(), threshold);
+    public VariableInputButton getRight_TriggerButton(double threshold){
+        return new VariableInputButton(getRight_Trigger(), threshold);
     }
 
     //variable input toggle buttons
 
-    public VariableInputToggleButton getLeftStickXToggleButton(double threshold){
+    public VariableInputToggleButton getLeft_Stick_XToggleButton(double threshold){
         return new VariableInputToggleButton(new VariableInputButton(getLeftStickX(), threshold));
     }
-    public VariableInputToggleButton getLeftStickYToggleButton(double threshold){
-        return new VariableInputToggleButton(new VariableInputButton(getLeftStickY(), threshold));
+    public VariableInputToggleButton getLeft_Stick_YToggleButton(double threshold){
+        return new VariableInputToggleButton(new VariableInputButton(getLeft_Stick_Y(), threshold));
     }
 
-    public VariableInputToggleButton getRightStickXToggleButton(double threshold){
-        return new VariableInputToggleButton(new VariableInputButton(getRightStickX(), threshold));
+    public VariableInputToggleButton getRight_Stick_XToggleButton(double threshold){
+        return new VariableInputToggleButton(new VariableInputButton(getRight_Stick_X(), threshold));
     }
-    public VariableInputToggleButton getRightStickYToggleButton(double threshold){
-        return new VariableInputToggleButton(new VariableInputButton(getRightStickY(), threshold));
+    public VariableInputToggleButton getRight_Stick_YToggleButton(double threshold){
+        return new VariableInputToggleButton(new VariableInputButton(getRight_Stick_Y(), threshold));
     }
 
-    public VariableInputToggleButton getLeftTriggerToggleButton(double threshold){
-        return new VariableInputToggleButton(new VariableInputButton(getLeftTrigger(), threshold));
+    public VariableInputToggleButton getLeft_TriggerToggleButton(double threshold){
+        return new VariableInputToggleButton(new VariableInputButton(getLeft_Trigger(), threshold));
     }
-    public VariableInputToggleButton getRightTriggerToggleButton(double threshold){
-        return new VariableInputToggleButton(new VariableInputButton(getRightTrigger(), threshold));
+    public VariableInputToggleButton getRight_TriggerToggleButton(double threshold){
+        return new VariableInputToggleButton(new VariableInputButton(getRight_Trigger(), threshold));
     }
 
 

@@ -31,15 +31,15 @@ public class ConfigCore {
         dpadUpButton = gamepadEx.getDpad_upButton();
         dpadDownButton = gamepadEx.getDpad_DownButton();
 
-        bButton = gamepadEx.getBButtonToggled();
+        bButton = gamepadEx.getBButtonToggle();
 
         leftStickXButton = gamepadEx.getLeftStickX();
-        leftStickYButton = gamepadEx.getLeftStickY();
+        leftStickYButton = gamepadEx.getLeft_Stick_Y();
 
-        rightStickXButton = gamepadEx.getRightStickX();
-        rightStickYButton = gamepadEx.getRightStickY();
+        rightStickXButton = gamepadEx.getRight_Stick_X();
+        rightStickYButton = gamepadEx.getRight_Stick_Y();
 
-        rightTriggerButton = gamepadEx.getRightTriggerToggleButton(0.5);
+        rightTriggerButton = gamepadEx.getRight_TriggerToggleButton(0.5);
     }
 
     /*
