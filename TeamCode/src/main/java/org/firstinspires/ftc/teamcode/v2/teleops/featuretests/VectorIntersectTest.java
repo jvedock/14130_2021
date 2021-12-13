@@ -4,8 +4,8 @@ package org.firstinspires.ftc.teamcode.v2.teleops.featuretests;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.v2.auto.field.Point;
-import org.firstinspires.ftc.teamcode.v2.auto.field.Vector;
+import org.firstinspires.ftc.teamcode.v2.advent.field.Point;
+import org.firstinspires.ftc.teamcode.v2.advent.field.Vector;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.ConfigCoreThread;
 
 @TeleOp(name = "Vector Intersect Test", group = "default")

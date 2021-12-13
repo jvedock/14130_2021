@@ -19,6 +19,7 @@ import java.util.regex.Pattern
 
 apply plugin: 'com.android.application'
 
+
 android {
 
     compileSdkVersion 29
@@ -45,6 +46,7 @@ android {
             storeFile rootProject.file('libs/ftc.debug.keystore')
             storePassword 'android'
         }
+
     }
 
     aaptOptions {

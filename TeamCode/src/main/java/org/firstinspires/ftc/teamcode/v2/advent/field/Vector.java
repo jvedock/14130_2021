@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.v2.auto.field;
+package org.firstinspires.ftc.teamcode.v2.advent.field;
 import org.firstinspires.ftc.teamcode.v2.util.UtilFuncs;
 public class Vector {
-    double magnitude, angle;
+    public double magnitude, angle;
 
-    double xComp, yComp;
+    public double xComp, yComp;
 
     Point startPoint, endPoint;
 

@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.teamcode.v2.auto.field;
+package org.firstinspires.ftc.teamcode.v2.advent.field;
 
-import static org.firstinspires.ftc.teamcode.v2.auto.field.Vector.intersect;
+import static org.firstinspires.ftc.teamcode.v2.advent.field.Vector.intersect;
 
 public class SquareArea{
     private Point corner1;
