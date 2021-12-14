@@ -33,7 +33,7 @@ public class Point {
         y2 = p2.y;
         double deltaX = x2-x1;
         double deltaY = y2-y1;
-        double angle = Math.atan2(deltaX, deltaY);
+        double angle = Math.atan2(deltaY, deltaX);
         if (angle < 0){
             angle += 2*Math.PI;
         }
