@@ -29,4 +29,13 @@ public class UtilFuncs {
         }
         return Math.toRadians(end);
     }
+
+    public void sleep(long millisecs){
+        try{
+            Thread.sleep(millisecs);
+        }
+        catch  (Exception e){
+
+        }
+    }
 }

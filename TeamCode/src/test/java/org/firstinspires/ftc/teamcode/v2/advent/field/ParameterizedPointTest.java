@@ -15,7 +15,7 @@ import java.util.Random;
 @RunWith(Parameterized.class)
 public class ParameterizedPointTest {
     Point p1, p2;
-    static int sets = TestData.getStandardRuns(TestData.State.LOW);
+    static int sets = TestData.getStandardRuns();
     Point lastPoint = new Point(0, 0);
 
     @Before

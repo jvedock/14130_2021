@@ -18,9 +18,9 @@ public class BotCore {
     private static final double CIRCUMFERENCE = 96*Math.PI;
 
     //Drive Motors
-    private DcMotorEx leftFront, leftRear, rightFront, rightRear;
+    public DcMotorEx leftFront, leftRear, rightFront, rightRear;
     //Lift Motors
-    private DcMotorEx liftLeft, liftRight;
+    public DcMotorEx liftLeft, liftRight;
     //IMU sensor
     private BNO055IMU imu;
 
@@ -60,9 +60,54 @@ public class BotCore {
         imu.initialize(parameters);
     }
 
+    //used for testing, please for the love of everything you stand for do not use this in a live hardware scenario
+    public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr, DcMotorEx intake, CRServo spinner,
+                   Servo magArm, Servo magRemoval, DcMotorEx liftLeft, DcMotorEx liftRight){
+        leftFront = lf;
+        leftRear = lr;
+        rightFront = rf;
+        rightRear = rr;
+        this.magArm = new MagArm(magArm, magRemoval);
+        this.duckSpinner = new DuckSpinner(spinner);
+
+        this.intake = new Intake(intake);
+
+        //duckSpinner = new DuckSpinner(spinner);
+        /*
+        magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
+
+        lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"));
+        //IMU initialization
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+
+        imu = map.get(BNO055IMU.class, "imu");
+        imu.initialize(parameters);
+
+         */
+    }
+
 
     public void move(double angle, double magnitude){
-        angle = Math.toRadians(angle+45);
+        angle = Math.toRadians(angle);
+
+
+        double lf_rrMod = Math.sin(angle+(1*Math.PI/4));
+        double lr_rfMod = Math.sin(angle-(1*Math.PI/4));
+
+
+        double lf_rrPow = lf_rrMod;
+        double lr_rfPow = lr_rfMod;
+
+        double mod = 1/(Math.max(Math.abs(lf_rrPow), Math.abs(lr_rfPow)));
+        lf_rrPow *= mod;
+        lr_rfPow *= mod;
+
+        leftFront.setPower(lf_rrPow);
+        rightRear.setPower(lf_rrPow);
+        rightFront.setPower(lr_rfPow);
+        leftRear.setPower(lr_rfPow);
     }
 
     public void move(double angle, double distance, double magnitude){

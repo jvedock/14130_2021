@@ -10,12 +10,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 public class MockDcMotorEx implements DcMotorEx {
-    boolean enabled;
+    public boolean enabled;
     public double velocity, power;
-    int targetPositionTolerance, targetPosition;
-    int currentPosition = 0;
-    RunMode mode;
-    Direction direction = Direction.FORWARD;
+    public int targetPositionTolerance, targetPosition;
+    public int currentPosition = 0;
+    public RunMode mode;
+    public Direction direction = Direction.FORWARD;
 
     
     @Override
