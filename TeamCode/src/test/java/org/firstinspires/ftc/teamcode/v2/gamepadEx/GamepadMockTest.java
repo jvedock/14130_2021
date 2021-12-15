@@ -16,9 +16,9 @@ public class GamepadMockTest {
     }
 
     @Test
-    public void mainTest(){
+    public void TestA(){
         assertFalse(pad.a);
-        padMock.setA(true);
+        padMock.set_a(true);
         assertTrue(pad.a);
         padMock.resetValues();
         assertFalse(pad.a);
