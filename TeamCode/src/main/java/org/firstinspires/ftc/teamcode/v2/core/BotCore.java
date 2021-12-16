@@ -87,6 +87,14 @@ public class BotCore {
 
          */
     }
+    // this one just uses motors
+    public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr){
+        leftFront = lf;
+        leftRear = lr;
+        rightFront = rf;
+        rightRear = rr;
+
+    }
 
 
     public void move(double angle, double magnitude){

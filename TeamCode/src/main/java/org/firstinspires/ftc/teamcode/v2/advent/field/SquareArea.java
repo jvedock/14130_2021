@@ -60,7 +60,20 @@ public class SquareArea{
     }
 
     public boolean inArea(Vector v){
-        if(intersect(v, v1) || intersect(v, v2) || intersect(v, v3) || intersect(v, v4)){
+        if(intersect(v, this.v1) || intersect(v, this.v2) || intersect(v, this.v3) || intersect(v, this.v4)){
+            return true;
+        }
+        else if(this.inArea(v.startPoint) || this.inArea(v.endPoint)){
+            return true;
+        }
+
+        return false;
+    }
+    public static boolean inArea(Vector v, SquareArea area){
+        if(intersect(v, area.v1) || intersect(v, area.v2) || intersect(v, area.v3) || intersect(v, area.v4)){
+            return true;
+        }
+        else if(area.inArea(v.startPoint) || area.inArea(v.endPoint)){
             return true;
         }
 

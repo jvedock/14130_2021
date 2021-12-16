@@ -16,17 +16,17 @@ public class TestData {
         State state = currentState;
         switch (state){
             case MINIMAL:
-                return 50;
+                return 10;
             case LOW:
                 return 1000;
             case MED:
-                return 50000;
+                return 5000;
             case HIGH:
-                return 100000;
+                return 10000;
             case CRAZY:
-                return 500000;
+                return 50000;
             case WHAT:
-                return 1000000;
+                return 100000;
         }
         return 1;
     }
@@ -34,7 +34,7 @@ public class TestData {
     public static int getStandardRuns(TestData.State state){
         switch (state){
             case MINIMAL:
-                return 50;
+                return 10;
             case LOW:
                 return 1000;
             case MED:

@@ -19,7 +19,7 @@ public class Vector {
         this.yComp = magnitude*Math.cos(angle);
         this.endPoint = new Point(startPoint.x+xComp, startPoint.y+yComp);
 
-        //uhg gotta convert heading to angle :/
+
         this.slope = yComp/xComp;
         this.yIntercept = startPoint.y-(startPoint.x*slope);
     }
@@ -57,8 +57,7 @@ public class Vector {
             double y = (v1.startPoint.x*v2.slope) + v2.yIntercept;
             double x = v1.startPoint.x;
 
-            System.out.println("Intersect X " + x);
-            System.out.println("Intersect Y " + y);
+
 
             p = new Point(x, y);
         }
@@ -66,8 +65,6 @@ public class Vector {
             double y = (v2.startPoint.x*v1.slope) + v1.yIntercept;
             double x = v2.startPoint.x;
 
-            System.out.println("Intersect X " + x);
-            System.out.println("Intersect Y " + y);
 
             p = new Point(x, y);
         }
