@@ -38,7 +38,8 @@ public class GamepadExCore {
     // Buttons
 
     public ToggleButton getAButtonToggle(){
-        return new ToggleButton(new StandardButton() {
+        return new BoolButton(
+                new ToggleButton(new StandardButton() {
             private ButtonCore button;
             @Override
             public boolean get() {
