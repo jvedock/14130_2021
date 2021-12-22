@@ -1,17 +1,17 @@
 package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
-public class VariableInputToggleButton {
+public class VariableInputToggleButton extends VariableInput{
     VariableInputButton button;
-    boolean lastState = false;
-    boolean state = false;
+    float lastState = 0;
+    float state = 0;
 
     public VariableInputToggleButton(VariableInputButton button){
         this.button = button;
     }
 
     private boolean getRise(){
-        boolean currentState = button.get();
-        if(currentState && !lastState){
+        float currentState = button.get();
+        if(and(not(currentState), lastState) == 1){
             lastState = currentState;
             return true;
         }
@@ -20,8 +20,8 @@ public class VariableInputToggleButton {
     }
 
     private boolean getFall(){
-        boolean currentState = button.get();
-        if(!currentState && lastState){
+        float currentState = button.get();
+        if(and(not(currentState), lastState) == 1){
             lastState = currentState;
             return true;
         }
@@ -29,12 +29,28 @@ public class VariableInputToggleButton {
         return false;
     }
 
-    public boolean get(){
+    public float get(){
         if (getRise()){
-            state = !state;
+            state = not(state);
         }
         return state;
     }
 
+
+    public float not(float in){
+        if(in == 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public float and(float in1, float in2){
+        if((in1 == 1) && (in2 == 1)){
+            return 1;
+        }
+        return 0;
+    }
 
 }

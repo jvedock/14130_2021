@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 //TODO: automatic clipping of float values here
-public class GamepadMock extends Gamepad {
+public class MockGamepad extends Gamepad {
     Gamepad pad;
-    public GamepadMock(){
+    public MockGamepad(){
         pad = new Gamepad();
         resetValues();
     }

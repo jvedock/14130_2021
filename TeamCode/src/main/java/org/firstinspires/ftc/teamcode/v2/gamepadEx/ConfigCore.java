@@ -28,7 +28,7 @@ public class ConfigCore {
 
         aButton = gamepadEx.getAButton();
         XButton = gamepadEx.getXButton();
-        dpadUpButton = gamepadEx.getDpad_upButton();
+        dpadUpButton = gamepadEx.getDpad_UpButton();
         dpadDownButton = gamepadEx.getDpad_DownButton();
 
         bButton = gamepadEx.getBButtonToggle();
@@ -96,7 +96,7 @@ public class ConfigCore {
         return rightStickYButton.get();
     }
 
-    public boolean right_triggerButton() {
+    public float right_triggerButton() {
         return rightTriggerButton.get();
     }
 

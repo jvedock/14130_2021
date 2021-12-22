@@ -5,7 +5,7 @@ public class Vector {
 
     public double xComp, yComp;
 
-    Point startPoint, endPoint;
+    public Point startPoint, endPoint;
 
     //data as if it were a line (used for intersections)
     double yIntercept, slope;

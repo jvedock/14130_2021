@@ -37,23 +37,36 @@ public class GamepadExCore {
     }
     // Buttons
 
-    public ToggleButton getAButtonToggle(){
-        return new BoolButton(
-                new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.a;
-            }
+    public StandardButton getAButtonToggle(){
 
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+
+                @Override
+                boolean get() {
+                    return gamepad.a;
+                }
+
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -80,21 +93,33 @@ public class GamepadExCore {
     }
 
     public ToggleButton getBButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.b;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.b;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -121,21 +146,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getBackButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.back;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.back;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -162,21 +198,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getDpad_DownButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.dpad_down;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.dpad_down;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -203,37 +250,57 @@ public class GamepadExCore {
     }
 
     public ToggleButton getDpad_UpButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.dpad_up;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.dpad_up;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
 
     }
-    public StandardButton getDpad_upButton() {
-        return new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getDpad_UpButton() {
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.a;
+                }
 
-            @Override
-            public boolean get() {
-                return gamepad.dpad_up;
-            }
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
 
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
+            ButtonCore buttonCore(){
+
                 if (button == null) {
                     button = new ButtonCore(this);
                 }
@@ -244,21 +311,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getDpad_LeftButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.dpad_left;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.dpad_left;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -285,21 +363,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getDpad_RightButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.dpad_right;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.dpad_right;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -326,21 +415,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getXButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.x;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.x;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -367,21 +467,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getYButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.y;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.y;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -408,21 +519,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getLeft_BumperButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.left_bumper;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.left_bumper;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -449,21 +571,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getRight_BumperButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.right_bumper;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.right_bumper;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -490,21 +623,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getLeft_Stick_ButtonButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.left_stick_button;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.left_stick_button;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -531,21 +675,32 @@ public class GamepadExCore {
     }
 
     public ToggleButton getRight_Stick_ButtonButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.right_stick_button;
-            }
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.right_stick_button;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 

@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
-public enum StandardButtons {
+public enum StandardButtonTypes {
     STANDARD,
     TOGGLE
 }

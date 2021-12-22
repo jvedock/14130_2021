@@ -8,13 +8,13 @@ Note: This is heavily based on the betterGamepad of team 9929,
 package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
 public class ButtonCore {
-    private final StandardButton button;
+    public final StandardButton button;
     private boolean last;
 
 
     public ButtonCore(StandardButton button){
         this.button = button;
-
+        button.button = this;
         this.last = button.get();
     }
 

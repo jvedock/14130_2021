@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
-public class VariableInputButton {
+public class VariableInputButton extends VariableInput{
 
     private VariableInput input;
     private double threshold;
@@ -10,11 +10,11 @@ public class VariableInputButton {
         this.threshold = threshold;
     }
 
-    public boolean get(){
+    public float get(){
         if(Math.abs(input.get())>Math.abs(threshold)){
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 
 

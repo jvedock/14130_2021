@@ -10,7 +10,7 @@ public class TestData {
         MINIMAL
     }
 
-    private static final State currentState = State.MINIMAL;
+    private static final State currentState = State.HIGH;
 
     public static int getStandardRuns(){
         State state = currentState;
