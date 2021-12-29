@@ -2,29 +2,16 @@ package org.firstinspires.ftc.teamcode.v2.auto.odometry;
 
 
 public class OdometryCore {
-    protected double xPos, yPos;
-    protected double heading;
+    private double x = 0;
+    private double y = 0;
+    private double heading;
 
-
+    private OdometryMath math;
+    private OdometryInterface odoInterface;
 
     public OdometryCore(){
-
-    }
-
-
-    public double getXPos(){
-        return xPos;
-    }
-    public double getYPos(){
-        return yPos;
-    }
-    public double getHeading(){
-        return heading;
-    }
-    public void setPos(double x, double y, double heading){
-        this.xPos = x;
-        this.yPos = y;
-        this.heading = heading;
+        odoInterface = new OdometryInterface();
+        math = new OdometryMath(odoInterface);
     }
 
 

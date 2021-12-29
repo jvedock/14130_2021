@@ -6,16 +6,7 @@ public class OdometryCore {
 
 
 
-    public double getX(){
-        return POSITION.x;
-    }
 
-    public double getY(){
-        return POSITION.y;
-    }
-    public double getRotation(){
-        return ROTATION;
-    }
 
 
 }
