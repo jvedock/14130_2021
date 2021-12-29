@@ -20,7 +20,7 @@ public class OdometryInterface {
     //the total movement of the bot in the given direction
     protected double totalDelta;
 
-    //the field centric movrment components
+    //the field centric movement components
     protected double absoluteX, absoluteY;
 
 
@@ -63,7 +63,7 @@ public class OdometryInterface {
         absoluteX = getXComp(totalDelta, absoluteMovementAngle);
         absoluteY = getYComp(totalDelta, absoluteMovementAngle);
 
-        
+
 
 
         prevXPos = xPos;
@@ -111,6 +111,8 @@ public class OdometryInterface {
             return 0;
         }
     }
+
+
 
     public static double normalizeAngle(double angle){
         while(angle<0){
