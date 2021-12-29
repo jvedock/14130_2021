@@ -45,9 +45,7 @@ public class OdometryInterface {
     }
 
     public void update(){
-        prevXPos = xPos;
-        prevYPos = yPos;
-        prevHeading = heading;
+
         xPos = getXPos();
         yPos = getYPos();
         heading = getHeading();
@@ -64,8 +62,13 @@ public class OdometryInterface {
 
         absoluteX = getXComp(totalDelta, absoluteMovementAngle);
         absoluteY = getYComp(totalDelta, absoluteMovementAngle);
+
         
 
+
+        prevXPos = xPos;
+        prevYPos = yPos;
+        prevHeading = heading;
     }
 
 
