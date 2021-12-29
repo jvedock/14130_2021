@@ -20,6 +20,8 @@ public class OdometryInterface {
     //the total movement of the bot in the given direction
     protected double totalDelta;
 
+    //the field centric movrment components
+    protected double absoluteX, absoluteY;
 
 
     public OdometryInterface(){
@@ -60,6 +62,9 @@ public class OdometryInterface {
 
         totalDelta = pythag(deltaXPos, deltaYPos);
 
+        absoluteX = getXComp(totalDelta, absoluteMovementAngle);
+        absoluteY = getYComp(totalDelta, absoluteMovementAngle);
+        
 
     }
 
@@ -118,6 +123,13 @@ public class OdometryInterface {
         double c;
         c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
         return c;
+    }
+
+    public static double getXComp(double distance, double angle){
+        return(distance*Math.sin(angle));
+    }
+    public static double getYComp(double distance, double angle){
+        return(distance*Math.cos(angle));
     }
 
 
