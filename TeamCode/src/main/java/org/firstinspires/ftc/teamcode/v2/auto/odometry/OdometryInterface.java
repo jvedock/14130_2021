@@ -86,17 +86,17 @@ public class OdometryInterface {
     this is terrible but idk how to do it better
     TODO: bother a geo teacher abt this
      */
-    protected static double computeAngle(double inX, double inY){
+    public static double computeAngle(double inX, double inY){
         double x = Math.abs(inX);
         double y = Math.abs(inY);
 
-        double angle = Math.atan(y/x);
+        double angle = Math.atan2(y, x);
         //both positive, quadrant 1
         if(inX >= 0 && inY >= 0){
             return angle;
         }
         //x positive y negative quadrant 2
-        else if(inX < 0 && inY >= 0){
+        else if(inX >= 0 && inY < 0){
             return (Math.PI-angle);
         }
         //both negative quadrant 3
@@ -108,7 +108,7 @@ public class OdometryInterface {
             return ((Math.PI*2)-angle);
         }
         else{
-            return 0;
+            return Double.POSITIVE_INFINITY;
         }
     }
 

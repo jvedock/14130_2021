@@ -1,4 +1,6 @@
+/*
 package org.firstinspires.ftc.teamcode.v2.teleoptests;
+
 
 import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 import org.firstinspires.ftc.teamcode.v2.mocks.MockBotFactory;
@@ -35,3 +37,4 @@ public class DuckSpinnerTest {
         assertEquals(0, core.duckSpinner.servo.getPower(), 0.01);
     }
 }
+*/

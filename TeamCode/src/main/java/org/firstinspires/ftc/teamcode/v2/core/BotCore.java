@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -43,14 +44,15 @@ public class BotCore {
         rightRear = map.get(DcMotorEx.class, "rightRear");
 
 
-
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
         intake = new Intake(map.get(DcMotorEx.class, "intakeMotor"));
 
-        duckSpinner = new DuckSpinner(map.get(CRServo.class, "duckServo"));
+        //duckSpinner = new DuckSpinner(map.get(CRServo.class, "duckServo"));
 
-        magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
+        //magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
 
-        lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"));
+        //lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"));
         //IMU initialization
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
@@ -98,7 +100,7 @@ public class BotCore {
 
 
     public void move(double angle, double magnitude){
-        angle = Math.toRadians(angle);
+
 
 
         double lf_rrMod = Math.sin(angle+(1*Math.PI/4));
@@ -111,6 +113,9 @@ public class BotCore {
         double mod = 1/(Math.max(Math.abs(lf_rrPow), Math.abs(lr_rfPow)));
         lf_rrPow *= mod;
         lr_rfPow *= mod;
+
+        lf_rrPow *= magnitude;
+        lr_rfPow *= magnitude;
 
         leftFront.setPower(lf_rrPow);
         rightRear.setPower(lf_rrPow);
@@ -204,7 +209,31 @@ public class BotCore {
     }
 
 
+    protected static double computeAngle(double inX, double inY){
+        double x = Math.abs(inX);
+        double y = Math.abs(inY);
 
+        double angle = Math.atan(y/x);
+        //both positive, quadrant 1
+        if(inX >= 0 && inY >= 0){
+            return angle;
+        }
+        //x positive y negative quadrant 2
+        else if(inX < 0 && inY >= 0){
+            return (Math.PI-angle);
+        }
+        //both negative quadrant 3
+        else if(inX < 0 && inY < 0){
+            return angle+Math.PI;
+        }
+        //x negative y positive quadrant 4
+        else if(inX < 0 && inY >= 0){
+            return ((Math.PI*2)-angle);
+        }
+        else{
+            return 0;
+        }
+    }
 
 
 
