@@ -20,10 +20,12 @@ public class ButtonCore {
 
     public boolean getRise(){
         boolean currentState = button.get();
-
-        if (currentState && !last){
-            last = true;
+        System.out.println("Checking Rise\nCurrent State: " + currentState + "\nLast State: " + last);
+        if (!currentState && last){
+            last = currentState;
+            //System.out.println("risen");
             return true;
+
 
         }
         last = currentState;
@@ -32,7 +34,7 @@ public class ButtonCore {
     public boolean getFall(){
         boolean currentState = button.get();
 
-        if (!currentState && last){
+        if (currentState && !last){
             last = true;
             return true;
 

@@ -15,7 +15,9 @@ public class MockGamepad extends Gamepad {
     }
 
     public void set_a(boolean value){
+        //System.out.println("Setting A to " + value);
         pad.a = value;
+        //System.out.println("a is " + pad.a);
     }
     public void set_b(boolean value){
         pad.b = value;

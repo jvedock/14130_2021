@@ -8,8 +8,12 @@ package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
 public abstract class StandardButton {
     abstract boolean get();
-    ButtonCore button;
+    public ButtonCore button;
+    public StandardButton(ButtonCore button){
+        this.button = button;
+    }
+    public StandardButton(){
 
-
+    }
     abstract ButtonCore buttonCore();
 }

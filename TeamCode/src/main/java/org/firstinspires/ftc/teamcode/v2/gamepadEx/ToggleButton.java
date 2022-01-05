@@ -9,21 +9,29 @@ package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 public class ToggleButton extends StandardButton{
 
 
-    private boolean state = false;
+    public boolean state = false;
 
     public boolean getState(){
         return false;
     }
+    public ToggleButton(ButtonCore button){
+        super(button);
+    }
+    public ToggleButton(){
 
+    }
+    @Override
     public boolean get(){
-
+        //System.out.println("Toggle rise called");
         if (button.getRise()){
-            state = !state;
-        }
 
+            state = !state;
+            System.out.println("risen, " + state);
+        }
+        //System.out.println("returning " + state);
         return state;
 
-         //return button.button.get();
+
     }
 
     ButtonCore buttonCore(){

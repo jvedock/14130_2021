@@ -45,6 +45,7 @@ public class GamepadEx {
                         aButton = factory.getAButton();
                     case TOGGLE:
                         aButton = factory.getAButtonToggle();
+
                 }
             case b:
                 switch(type){
