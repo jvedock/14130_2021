@@ -24,10 +24,10 @@ public class GamepadExTest extends LinearOpMode {
         while(opModeIsActive()){
 
             telemetry.addData("a", gamepadEx.a());
-            telemetry.addData("A Expected", gamepad1.a);
+            telemetry.addData("A actual", gamepad1.a);
 
             telemetry.addData("B Toggle", gamepadEx.b());
-            telemetry.addData("B Expected", gamepad1.b);
+            telemetry.addData("B actual", gamepad1.b);
             /*
             telemetry.addData("left stick x" ,gamepadEx.left_stick_x);
             telemetry.addData("lsx Expected", gamepad1.left_stick_x);
