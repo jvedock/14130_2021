@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.v2.advent.field.Point;
 import org.firstinspires.ftc.teamcode.v2.advent.field.Vector;
+import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 
 public class Localizer {
     public DcMotorEx lf, rf, lr, rr;
@@ -11,7 +12,7 @@ public class Localizer {
     double lf_rrTarget, rf_lrTarget;
 
 
-    public Localizer(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr){
+    public Localizer(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr, BotCore bot){
         this.lf = lf;
         this.rf = rf;
         this.lr = lr;

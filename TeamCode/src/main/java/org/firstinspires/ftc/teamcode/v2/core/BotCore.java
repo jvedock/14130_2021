@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.v2.controltheory.Localizer;
 import org.firstinspires.ftc.teamcode.v2.core.components.DuckSpinner;
 import org.firstinspires.ftc.teamcode.v2.core.components.Intake;
 import org.firstinspires.ftc.teamcode.v2.core.components.Lift;
@@ -33,7 +34,7 @@ public class BotCore {
     public Lift lift;
 
 
-
+    Localizer localizer;
 
     private DcMotorEx intakeMotor;
     public BotCore(HardwareMap map){
@@ -43,21 +44,20 @@ public class BotCore {
         rightRear = map.get(DcMotorEx.class, "rightRear");
 
 
-
+        
         intake = new Intake(map.get(DcMotorEx.class, "intakeMotor"));
-
         duckSpinner = new DuckSpinner(map.get(CRServo.class, "duckServo"));
-
         magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
-
         lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"));
+
         //IMU initialization
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json";
         imu = map.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
+
+
+        localizer = new Localizer(leftFront, rightFront, leftRear, rightRear, this);
     }
 
     //used for testing, please for the love of everything you stand for do not use this in a live hardware scenario

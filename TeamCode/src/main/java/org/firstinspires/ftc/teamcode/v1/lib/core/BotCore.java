@@ -13,6 +13,7 @@ import static org.firstinspires.ftc.teamcode.v1.lib.DATA.*;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.v1.lib.nav.Point;
 import org.firstinspires.ftc.teamcode.v1.lib.nav.StandardTrajectory;
+import org.firstinspires.ftc.teamcode.v2.controltheory.Localizer;
 
 public class BotCore{
     private DcMotorEx leftFront, rightFront, leftRear, rightRear;
@@ -22,6 +23,7 @@ public class BotCore{
     double driveMod = 1;
 
 
+
     public BotCore(DcMotorEx leftFront, DcMotorEx rightFront, DcMotorEx leftRear, DcMotorEx rightRear, Gamepad gamepad, CRServo turntable) {
         this.leftFront = leftFront;
         this.rightFront = rightFront;
@@ -29,6 +31,7 @@ public class BotCore{
         this.rightRear = rightRear;
         this.gamepad1 = gamepad;
         this.turntableServo = turntable;
+
     }
 
 
