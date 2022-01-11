@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 //TODO: automatic clipping of float values here
-public class GamepadMock extends Gamepad {
+public class MockGamepad extends Gamepad {
     Gamepad pad;
-    public GamepadMock(){
+    public MockGamepad(){
         pad = new Gamepad();
         resetValues();
     }
@@ -15,7 +15,9 @@ public class GamepadMock extends Gamepad {
     }
 
     public void set_a(boolean value){
+        //System.out.println("Setting A to " + value);
         pad.a = value;
+        //System.out.println("a is " + pad.a);
     }
     public void set_b(boolean value){
         pad.b = value;
@@ -62,6 +64,8 @@ public class GamepadMock extends Gamepad {
     public void set_right_stick_y(float value){
         pad.right_stick_y = value;
     }
+    public void set_left_trigger(float value){pad.left_trigger = value;}
+    public void set_right_trigger(float value){pad.right_trigger = value;}
 
 
 

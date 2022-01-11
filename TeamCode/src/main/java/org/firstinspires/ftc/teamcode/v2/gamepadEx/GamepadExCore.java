@@ -1,9 +1,8 @@
-/*
-Note: This is heavily based on the betterGamepad of team 9929,
- and should be considered to be aButton minimised version of if for our own purposes
- all credit for the very clever way this is implemented goes to them
- TODO: copy over their copyright notice
- */
+
+
+//Aut inveniam viam aut faciam
+
+
 package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
 /*
@@ -19,6 +18,7 @@ is staring back
 proceed if you must, but I accept no responsibility for physical, mental, or political
 damage incurred while attempting to read this
 don't say i didn't warn you
+
  */
 /*
 TODO: add aButton config class that can be extended with overridable methods for easier creation and compatibility
@@ -27,6 +27,8 @@ TODO: add a debounced button that will return true the first time checked but no
 that one will be hard to put into threading :/
  */
 
+
+import android.widget.Button;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
@@ -37,22 +39,50 @@ public class GamepadExCore {
     }
     // Buttons
 
-    public ToggleButton getAButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+
+    public StandardButton testButton(){
+
+
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.a;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
+    }
+
+    public StandardButton getAButtonToggle(){
+
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
+            @Override
+            boolean get() {
+                //System.out.println("wrong rise called");
+                return gamepad.a;
+            }
+
+            @Override
+            ButtonCore buttonCore() {
+                if (button == null) {
+                    button = new ButtonCore(this);
+                }
+
+                return button;
+            }
+        });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -78,22 +108,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getBButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getBButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.b;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -119,22 +152,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getBackButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getBackButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.back;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -160,22 +196,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getDpad_DownButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getDpad_DownButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.dpad_down;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -201,38 +240,50 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getDpad_UpButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getDpad_UpButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.dpad_up;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
 
     }
-    public StandardButton getDpad_upButton() {
-        return new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getDpad_UpButton() {
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.a;
+                }
 
-            @Override
-            public boolean get() {
-                return gamepad.dpad_up;
-            }
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
 
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
+            ButtonCore buttonCore(){
+
                 if (button == null) {
                     button = new ButtonCore(this);
                 }
@@ -242,22 +293,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getDpad_LeftButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getDpad_LeftButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.dpad_left;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -283,22 +337,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getDpad_RightButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getDpad_RightButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.dpad_right;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -324,22 +381,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getXButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getXButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.x;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -365,22 +425,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getYButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getYButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.y;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -406,23 +469,26 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getLeft_BumperButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getLeft_BumperButtonToggle(){
+
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.left_bumper;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
-
+        return new ToggleButton(buttonCore);
 
 
 
@@ -447,22 +513,33 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getRight_BumperButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
-            @Override
-            public boolean get() {
-                return gamepad.right_bumper;
-            }
+    public StandardButton getRight_BumperButtonToggle(){
+        return new ToggleButton(){
+            ButtonCore button = new ButtonCore(new StandardButton() {
+                @Override
+                boolean get() {
+                    return gamepad.left_bumper;
+                }
 
+                @Override
+                ButtonCore buttonCore() {
+                    if (button == null) {
+                        button = new ButtonCore(this);
+                    }
+
+                    return button;
+                }
+            });
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore(){
+
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
-        });
+        };
 
 
 
@@ -488,23 +565,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getLeft_Stick_ButtonButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getLeft_Stick_ButtonButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.left_stick_button;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
-
+        return new ToggleButton(buttonCore);
 
 
 
@@ -529,22 +608,25 @@ public class GamepadExCore {
         };
     }
 
-    public ToggleButton getRight_Stick_ButtonButtonToggle(){
-        return new ToggleButton(new StandardButton() {
-            private ButtonCore button;
+    public StandardButton getRight_Stick_ButtonButtonToggle(){
+        final ButtonCore buttonCore = new ButtonCore(new StandardButton() {
+
             @Override
-            public boolean get() {
+            boolean get() {
+                //System.out.println("wrong rise called");
                 return gamepad.right_stick_button;
             }
 
             @Override
-            public ButtonCore buttonCore() {
-                if (button == null){
+            ButtonCore buttonCore() {
+                if (button == null) {
                     button = new ButtonCore(this);
                 }
+
                 return button;
             }
         });
+        return new ToggleButton(buttonCore);
 
 
 
@@ -648,6 +730,8 @@ public class GamepadExCore {
     //variable input toggle buttons
 
     public VariableInputToggleButton getLeft_Stick_XToggleButton(double threshold){
+
+
         return new VariableInputToggleButton(new VariableInputButton(getLeftStickX(), threshold));
     }
     public VariableInputToggleButton getLeft_Stick_YToggleButton(double threshold){

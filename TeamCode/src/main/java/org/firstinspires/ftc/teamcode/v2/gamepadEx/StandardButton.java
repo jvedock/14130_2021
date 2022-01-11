@@ -6,8 +6,14 @@ Note: This is heavily based on the betterGamepad of team 9929,
  */
 package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
-public interface StandardButton {
-    boolean get();
+public abstract class StandardButton {
+    abstract boolean get();
+    public ButtonCore button;
+    public StandardButton(ButtonCore button){
+        this.button = button;
+    }
+    public StandardButton(){
 
-    ButtonCore buttonCore();
+    }
+    abstract ButtonCore buttonCore();
 }

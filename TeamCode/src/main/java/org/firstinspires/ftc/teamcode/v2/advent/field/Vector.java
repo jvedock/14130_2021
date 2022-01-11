@@ -5,7 +5,7 @@ public class Vector {
 
     public double xComp, yComp;
 
-    Point startPoint, endPoint;
+    public Point startPoint, endPoint;
 
     //data as if it were a line (used for intersections)
     double yIntercept, slope;
@@ -15,8 +15,8 @@ public class Vector {
         this.startPoint = startPoint;
         this.magnitude = magnitude;
         this.angle = angle;
-        this.xComp = magnitude*Math.sin(angle);
-        this.yComp = magnitude*Math.cos(angle);
+        this.xComp = magnitude*Math.cos(angle);
+        this.yComp = magnitude*Math.sin(angle);
         this.endPoint = new Point(startPoint.x+xComp, startPoint.y+yComp);
 
 

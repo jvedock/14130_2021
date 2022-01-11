@@ -8,22 +8,24 @@ Note: This is heavily based on the betterGamepad of team 9929,
 package org.firstinspires.ftc.teamcode.v2.gamepadEx;
 
 public class ButtonCore {
-    private final StandardButton button;
+    public final StandardButton button;
     private boolean last;
 
 
     public ButtonCore(StandardButton button){
         this.button = button;
-
+        button.button = this;
         this.last = button.get();
     }
 
     public boolean getRise(){
         boolean currentState = button.get();
-
-        if (currentState && !last){
-            last = true;
+        System.out.println("Checking Rise\nCurrent State: " + currentState + "\nLast State: " + last);
+        if (!currentState && last){
+            last = currentState;
+            //System.out.println("risen");
             return true;
+
 
         }
         last = currentState;
@@ -32,7 +34,7 @@ public class ButtonCore {
     public boolean getFall(){
         boolean currentState = button.get();
 
-        if (!currentState && last){
+        if (currentState && !last){
             last = true;
             return true;
 
