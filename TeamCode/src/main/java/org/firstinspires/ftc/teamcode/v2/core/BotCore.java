@@ -17,62 +17,67 @@ public class BotCore {
     private static final double CLICKS_PER_ROTATION = 0;
     private static final double CIRCUMFERENCE = 96*Math.PI;
 
-    //Drive Motors
+
+    //Drivetrain Motor declaration
     public DcMotorEx leftFront, leftRear, rightFront, rightRear;
-    //Lift Motors
-    public DcMotorEx liftLeft, liftRight;
+
+
     //IMU sensor
     private BNO055IMU imu;
 
 
-
-
+    //Component Declaration
     public Intake intake;
     public DuckSpinner duckSpinner;
     public MagArm magArm;
     public Lift lift;
 
 
-
-
+    //Misc Motor Declaration
     private DcMotorEx intakeMotor;
+    public DcMotorEx liftLeft, liftRight;
+
+
     public BotCore(HardwareMap map){
+        //Drivetrain Initialization
         leftFront = map.get(DcMotorEx.class, "leftFront");
         leftRear = map.get(DcMotorEx.class, "leftRear");
         rightFront = map.get(DcMotorEx.class, "rightFront");
         rightRear = map.get(DcMotorEx.class, "rightRear");
 
 
-
+        //Component Initialization
         intake = new Intake(map.get(DcMotorEx.class, "intakeMotor"));
-
         duckSpinner = new DuckSpinner(map.get(CRServo.class, "duckServo"));
-
         magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
-
         lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"));
+
+
         //IMU initialization
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-
         parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-
         imu = map.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
     }
 
-    //used for testing, please for the love of everything you stand for do not use this in a live hardware scenario
+
+    //used for testing, use in a live hardware scenario is not recommended for readability of OpMode
     public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr, DcMotorEx intake, CRServo spinner,
                    Servo magArm, Servo magRemoval, DcMotorEx liftLeft, DcMotorEx liftRight){
+        //Drivetrain Init
         leftFront = lf;
         leftRear = lr;
         rightFront = rf;
         rightRear = rr;
+
+
+        //Component Init
         this.magArm = new MagArm(magArm, magRemoval);
         this.duckSpinner = new DuckSpinner(spinner);
-
         this.intake = new Intake(intake);
+        duckSpinner = new DuckSpinner(spinner);
 
-        //duckSpinner = new DuckSpinner(spinner);
+
         /*
         magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
 
@@ -87,6 +92,8 @@ public class BotCore {
 
          */
     }
+
+
     // this one just uses motors
     public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr){
         leftFront = lf;
@@ -97,13 +104,17 @@ public class BotCore {
     }
 
 
+    /**
+     * Sets robot to move in a given direction at a given speed
+     *
+     * @param angle the angel to move at in degrees
+     * @param magnitude the magnitude (speed) to move at, between 0 and 1
+     */
     public void move(double angle, double magnitude){
         angle = Math.toRadians(angle);
 
-
         double lf_rrMod = Math.sin(angle+(1*Math.PI/4));
         double lr_rfMod = Math.sin(angle-(1*Math.PI/4));
-
 
         double lf_rrPow = lf_rrMod;
         double lr_rfPow = lr_rfMod;
@@ -118,17 +129,21 @@ public class BotCore {
         leftRear.setPower(lr_rfPow);
     }
 
+
+    /**
+     * moves at a given angle and speed for a distance given in mm
+     *
+     * @param angle the angle to move at in degrees
+     * @param distance the distance to move in mm
+     * @param magnitude the speed to move, between 0 and 1
+     */
     public void move(double angle, double distance, double magnitude){
         double[][] results = getMovement(angle, distance, magnitude);
 
         int lf_rrClicks =(int) results[0][1];
-
         int lr_rfClicks =(int) results[1][1];
-
         int lf_rrPow =(int) results[0][0];
-
         int lr_rfPow =(int) results[1][0];
-
 
         leftFront.setTargetPosition(leftFront.getCurrentPosition()+lf_rrClicks);
         rightRear.setTargetPosition(rightRear.getCurrentPosition()+lf_rrClicks);
@@ -168,6 +183,7 @@ public class BotCore {
      * 0: lf 1: rf 2: lr 3: rr
      * the second index denotes the type of data
      * 0: motor power 1: desired clicks
+     *
      * @param angle
      * @param distance
      * @param magnitude
@@ -175,6 +191,7 @@ public class BotCore {
      */
     public double[][] getMovement(double angle, double distance, double magnitude){
         double[][] result = new double[4][2];
+
         angle = Math.toRadians(angle);
 
         double mainClicks = mmToClicks(distance);
@@ -199,7 +216,14 @@ public class BotCore {
         return result;
     }
 
-    private double mmToClicks(double mm){
+
+    /**
+     * Returns the given distance in mm, converted to clicks
+     *
+     * @param mm the mm to convert to clicks
+     * @return the number of click that are equal to the given distance
+     */
+    public static double mmToClicks(double mm){
         return (mm/CIRCUMFERENCE)*CLICKS_PER_ROTATION;
     }
 
