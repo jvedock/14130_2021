@@ -31,7 +31,12 @@ public class GamepadEx {
         dpad_rightButton = factory.getDpad_RightButton();
         left_stick_buttonButton = factory.getLeft_Stick_ButtonButton();
         right_stick_buttonButton = factory.getRight_Stick_ButtonButton();
-
+        left_trigger = factory.getLeft_Trigger();
+        right_trigger = factory.getRight_Trigger();
+        left_stick_x = factory.getLeftStickX();
+        right_stick_x = factory.getRight_Stick_X();
+        left_stick_y = factory.getLeft_Stick_Y();
+        right_stick_y = factory.getRight_Stick_Y();
 
 
     }
@@ -195,6 +200,7 @@ public class GamepadEx {
                 }
                 break;
             case left_trigger:
+
                 switch(type){
                     case STANDARD:
                         left_trigger = factory.getLeft_Trigger();
@@ -248,5 +254,11 @@ public class GamepadEx {
     public boolean right_stick_button(){
         return right_stick_buttonButton.get();
     }
+    public float left_trigger(){return left_trigger.get();}
+    public float right_trigger(){return right_trigger.get();}
+    public float right_stick_x(){return right_stick_x.get();}
+    public float right_stick_y(){return right_stick_y.get();}
+    public float left_stick_x(){return left_stick_x.get();}
+    public float left_stick_y(){return left_stick_y.get();}
 
 }

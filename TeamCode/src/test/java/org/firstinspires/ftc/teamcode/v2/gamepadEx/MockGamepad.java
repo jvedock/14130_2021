@@ -64,6 +64,8 @@ public class MockGamepad extends Gamepad {
     public void set_right_stick_y(float value){
         pad.right_stick_y = value;
     }
+    public void set_left_trigger(float value){pad.left_trigger = value;}
+    public void set_right_trigger(float value){pad.right_trigger = value;}
 
 
 

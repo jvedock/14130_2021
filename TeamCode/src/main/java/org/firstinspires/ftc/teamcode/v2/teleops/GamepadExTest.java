@@ -22,7 +22,7 @@ public class GamepadExTest extends LinearOpMode {
 
 
         while(opModeIsActive()){
-
+            
             telemetry.addData("a", gamepadEx.a());
             telemetry.addData("A actual", gamepad1.a);
 

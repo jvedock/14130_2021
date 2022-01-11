@@ -15,8 +15,8 @@ public class Vector {
         this.startPoint = startPoint;
         this.magnitude = magnitude;
         this.angle = angle;
-        this.xComp = magnitude*Math.sin(angle);
-        this.yComp = magnitude*Math.cos(angle);
+        this.xComp = magnitude*Math.cos(angle);
+        this.yComp = magnitude*Math.sin(angle);
         this.endPoint = new Point(startPoint.x+xComp, startPoint.y+yComp);
 
 
