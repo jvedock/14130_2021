@@ -36,6 +36,8 @@ public class GamepadExTest extends LinearOpMode {
              */
             telemetry.update();
 
+
+            stop();
         }
 
 

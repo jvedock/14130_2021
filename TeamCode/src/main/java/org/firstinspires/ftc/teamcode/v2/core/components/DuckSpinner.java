@@ -1,15 +1,16 @@
 package org.firstinspires.ftc.teamcode.v2.core.components;
 
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 public class DuckSpinner {
-    public CRServo servo;
+    public DcMotorEx servo;
 
     /**
      *
      * @param servo the servo attached to the spinner
      */
-    public DuckSpinner(CRServo servo){
+    public DuckSpinner(DcMotorEx servo){
         this.servo = servo;
     }
 

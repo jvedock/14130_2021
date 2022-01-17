@@ -54,7 +54,7 @@ public class PID extends Thread{
     public void setPIDCoefficients(double[] coefficients){
         P_COEFFICIENT = coefficients[0];
         I_COEFFICIENT = coefficients[1];
-        D_COEFFICIENT = coefficients[3];
+        D_COEFFICIENT = coefficients[2];
 
     }
 
@@ -66,7 +66,7 @@ public class PID extends Thread{
         return System.nanoTime()-lastTime;
     }
 
-    private void setTarget(double target){
+    public void setTarget(double target){
         expected = target;
     }
 
@@ -75,7 +75,8 @@ public class PID extends Thread{
     }
 
     public void run(double pos){
-        actual = pos;
+        actual = pos*(360/3.3);
         motor.setPower(getPower());
     }
+
 }

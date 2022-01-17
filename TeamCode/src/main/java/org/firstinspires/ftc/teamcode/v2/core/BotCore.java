@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.v2.core;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -42,15 +44,17 @@ public class BotCore {
         rightFront = map.get(DcMotorEx.class, "rightFront");
         rightRear = map.get(DcMotorEx.class, "rightRear");
 
+        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        intake = new Intake(map.get(DcMotorEx.class, "intakeMotor"),
+                map.get(Servo.class, "intakeBlock"),
+                        map.get(Servo.class, "intakeFlop"));
 
 
-        intake = new Intake(map.get(DcMotorEx.class, "intakeMotor"));
+        duckSpinner = new DuckSpinner(map.get(DcMotorEx.class, "duckSpinner"));
 
-        duckSpinner = new DuckSpinner(map.get(CRServo.class, "duckServo"));
-
-        magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
-
-        lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"));
+        lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"), map.get(AnalogInput.class, "liftInput"));
         //IMU initialization
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
@@ -58,10 +62,12 @@ public class BotCore {
 
         imu = map.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
+
+        //Odometry lift is odoServo
     }
 
     //used for testing, please for the love of everything you stand for do not use this in a live hardware scenario
-    public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr, DcMotorEx intake, CRServo spinner,
+    public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr, DcMotorEx intake, DcMotorEx spinner,
                    Servo magArm, Servo magRemoval, DcMotorEx liftLeft, DcMotorEx liftRight){
         leftFront = lf;
         leftRear = lr;
@@ -70,7 +76,7 @@ public class BotCore {
         this.magArm = new MagArm(magArm, magRemoval);
         this.duckSpinner = new DuckSpinner(spinner);
 
-        this.intake = new Intake(intake);
+        //this.intake = new Intake(intake);
 
         //duckSpinner = new DuckSpinner(spinner);
         /*
@@ -96,19 +102,63 @@ public class BotCore {
 
     }
 
+    public void move(double angle, double magnitude, float turn){
+        //angle = Math.toRadians(angle);
+
+
+        double lf_rrMod = Math.sin(angle+(Math.PI/4));
+        double lr_rfMod = Math.sin(angle-(Math.PI/4));
+
+
+
+        double lf_rrPow = (lf_rrMod*magnitude);
+        double lr_rfPow = (lr_rfMod*magnitude);
+
+        double lf = lf_rrPow+turn;
+        double rf = lr_rfPow-turn;
+        double lr = lr_rfPow+turn;
+        double rr = lf_rrPow-turn;
+        double mod;
+        double max = Math.max(Math.abs(lf_rrPow), Math.abs(lr_rfPow));
+        if((max) == 0){
+            mod = 0;
+        }
+        else {
+            mod = 1 / (max);
+        }
+        mod = 1;
+
+        lf *= mod;
+        rf *= mod;
+        lr *= mod;
+        rr *= mod;
+
+        leftFront.setPower(lf);
+        rightRear.setPower(rr);
+        rightFront.setPower(rf);
+        leftRear.setPower(lr);
+    }
 
     public void move(double angle, double magnitude){
-        angle = Math.toRadians(angle);
+        //angle = Math.toRadians(angle);
 
 
-        double lf_rrMod = Math.sin(angle+(1*Math.PI/4));
-        double lr_rfMod = Math.sin(angle-(1*Math.PI/4));
+        double lf_rrMod = Math.sin(angle+(Math.PI/4));
+        double lr_rfMod = Math.sin(angle-(Math.PI/4));
 
 
-        double lf_rrPow = lf_rrMod;
-        double lr_rfPow = lr_rfMod;
 
-        double mod = 1/(Math.max(Math.abs(lf_rrPow), Math.abs(lr_rfPow)));
+        double lf_rrPow = lf_rrMod*magnitude;
+        double lr_rfPow = lr_rfMod*magnitude;
+
+        double mod;
+        if(Math.max(Math.abs(lf_rrPow), Math.abs(lr_rfPow)) == 0){
+            mod = 0;
+        }
+        else {
+            mod = 1 / (Math.max(Math.abs(lf_rrPow), Math.abs(lr_rfPow)));
+        }
+        mod = 1;
         lf_rrPow *= mod;
         lr_rfPow *= mod;
 
