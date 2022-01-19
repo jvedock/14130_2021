@@ -24,7 +24,7 @@ public class BotCore {
     //Lift Motors
     public DcMotorEx liftLeft, liftRight;
     //IMU sensor
-    private BNO055IMU imu;
+    public BNO055IMU imu;
 
 
 
@@ -83,15 +83,12 @@ public class BotCore {
         magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
 
         lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"));
+        */
         //IMU initialization
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
 
-        imu = map.get(BNO055IMU.class, "imu");
-        imu.initialize(parameters);
 
-         */
+
     }
     // this one just uses motors
     public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr){

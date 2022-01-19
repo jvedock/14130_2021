@@ -8,7 +8,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.v2.controltheory.PID;
 
 public class Lift {
+    public boolean isUp;
     private DcMotorEx left, right;
+
+    public double baseline = 0;
 
     private Servo door;
 
@@ -34,7 +37,7 @@ public class Lift {
         right.setDirection(DcMotorSimple.Direction.REVERSE);
         left.setDirection(DcMotorSimple.Direction.REVERSE);
         pid = new PID(leftMotor);
-        pid.setPIDCoefficients(new double[]{0.03, 0, 0});
+        pid.setPIDCoefficients(new double[]{0.01, 0, 0});
 
         //close();
     }
@@ -60,7 +63,13 @@ public class Lift {
         door.setPosition(pos);
     }
     public void run(){
-        pid.run(in.getVoltage());
+        if(pid.getTarget() >= baseline-3 && pid.getTarget() <= baseline+3){
+            isUp = false;
+        }
+        else{
+            isUp = true;
+        }
+        pid.run(in.getVoltage()*(360/3.3));
         right.setPower(-left.getPower());
     }
 }

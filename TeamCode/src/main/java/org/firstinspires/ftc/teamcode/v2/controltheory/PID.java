@@ -70,12 +70,12 @@ public class PID extends Thread{
         expected = target;
     }
 
-    private double getTarget(){
+    public double getTarget(){
         return expected;
     }
 
     public void run(double pos){
-        actual = pos*(360/3.3);
+        actual = pos;
         motor.setPower(getPower());
     }
 

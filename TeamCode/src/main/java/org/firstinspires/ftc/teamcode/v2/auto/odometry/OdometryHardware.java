@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.v2.auto.odometry;
 
 import org.firstinspires.ftc.teamcode.v2.advent.field.Point;
+import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 
 public class OdometryHardware {
 
@@ -8,28 +9,31 @@ public class OdometryHardware {
     public double prevYWheel = 0;
     public double prevHeading = 0;
 
-    double xWheelPos, yWheelPos, heading;
+    double xWheelPos = 0;
+    double yWheelPos = 0;
+    double heading = 0;
 
-    public OdometryHardware(){
+    BotCore bot;
 
+    public OdometryHardware(BotCore bot){
+        this.bot = bot;
     }
     public OdometryHardware(Point startPoint){
         prevXWheel = startPoint.x;
         prevYWheel = startPoint.y;
     }
 
-    private double getAngle(){
-        return 0;
+    private double getHeading(){
+        return 0;//formatAngle(angles.angleUnit, angles.firstAngle);;
     }
 
     private double getXWheelPosition(){
+        return bot.rightFront.getCurrentPosition();
 
-        return 0;
     }
 
     private double getYWheelPosition(){
-
-        return 0;
+        return bot.leftFront.getCurrentPosition();
     }
 
     public double getDeltaXWheel(){
@@ -46,7 +50,7 @@ public class OdometryHardware {
 
         xWheelPos = getXWheelPosition();
         yWheelPos = getYWheelPosition();
-        heading = getAngle();
+        heading = getHeading();
 
     }
 }

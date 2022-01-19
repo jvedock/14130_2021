@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.v2.auto.odometry;
 
 import org.firstinspires.ftc.teamcode.v2.advent.field.Point;
 import org.firstinspires.ftc.teamcode.v2.advent.field.Vector;
+import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 
 public class OdometryCore {
     protected Point currentPos;
@@ -10,8 +11,8 @@ public class OdometryCore {
     private OdometryHardware odoBot;
 
 
-    public OdometryCore(){
-        odoBot = new OdometryHardware();
+    public OdometryCore(BotCore bot){
+        odoBot = new OdometryHardware(bot);
     }
 
 

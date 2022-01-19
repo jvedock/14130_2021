@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Intake {
-    private DcMotorEx intakeMotor;
+    public DcMotorEx intakeMotor;
     public Servo flopServo, blockServo;
     /**
      *
@@ -29,6 +29,15 @@ public class Intake {
     }
     public void setBlockPos(double pos){
         blockServo.setPosition(pos);
+    }
+    public void lowerBlock(){
+        blockServo.setPosition(0.35);
+    }
+    public void raiseBlock(){
+        blockServo.setPosition(0);
+    }
+    public double getMotorPower(){
+        return intakeMotor.getPower();
     }
 
 }
