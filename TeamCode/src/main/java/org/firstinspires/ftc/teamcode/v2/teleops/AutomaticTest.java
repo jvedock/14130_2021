@@ -18,13 +18,14 @@ public class AutomaticTest extends LinearOpMode {
     Orientation angles;
     public void runOpMode(){
         bot = new BotCore(hardwareMap);
-        while(opModeIsActive() && !done){
+        while(opModeIsActive()){
             angles = bot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("angle1", angles.firstAngle);
             telemetry.addData("angle2", angles.secondAngle);
             telemetry.addData("angle3", angles.thirdAngle);
 
             telemetry.update();
+            stop();
         }
 
     }

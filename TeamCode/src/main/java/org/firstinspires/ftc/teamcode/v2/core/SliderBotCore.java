@@ -14,8 +14,9 @@ import org.firstinspires.ftc.teamcode.v2.core.components.DuckSpinner;
 import org.firstinspires.ftc.teamcode.v2.core.components.Intake;
 import org.firstinspires.ftc.teamcode.v2.core.components.Lift;
 import org.firstinspires.ftc.teamcode.v2.core.components.MagArm;
+import org.firstinspires.ftc.teamcode.v2.core.components.SliderIntake;
 
-public class BotCore {
+public class SliderBotCore {
     //constants
 
     private final double odoUpPos = 0.7;
@@ -31,16 +32,16 @@ public class BotCore {
 
 
 
-    public Intake intake;
+    public SliderIntake intake;
     public DuckSpinner duckSpinner;
     public MagArm magArm;
-    public Lift lift;
+
 
     public Servo odoUp;
 
 
     private DcMotorEx intakeMotor;
-    public BotCore(HardwareMap map){
+    public SliderBotCore(HardwareMap map){
         leftFront = map.get(DcMotorEx.class, "leftFront");
         leftRear = map.get(DcMotorEx.class, "leftRear");
         rightFront = map.get(DcMotorEx.class, "rightFront");
@@ -49,16 +50,14 @@ public class BotCore {
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        intake = new Intake(map.get(DcMotorEx.class, "intakeMotor"),
-                map.get(Servo.class, "intakeBlock"),
-                        map.get(Servo.class, "intakeFlop"));
+        intake = new SliderIntake(map.get(DcMotorEx.class, "intakeOne"), map.get(DcMotorEx.class, "intakeTwo"));
 
 
-        duckSpinner = new DuckSpinner(map.get(DcMotorEx.class, "duckSpinner"));
+        //duckSpinner = new DuckSpinner(map.get(DcMotorEx.class, "duckSpinner"));
 
-        lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"), map.get(AnalogInput.class, "liftInput"));
 
-        odoUp = map.get(Servo.class, "odoServo");
+
+        //odoUp = map.get(Servo.class, "odoServo");
 
         //IMU initialization
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -72,7 +71,7 @@ public class BotCore {
     }
 
     //used for testing, please for the love of everything you stand for do not use this in a live hardware scenario
-    public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr, DcMotorEx intake, DcMotorEx spinner,
+    public SliderBotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr, DcMotorEx intake, DcMotorEx spinner,
                    Servo magArm, Servo magRemoval, DcMotorEx liftLeft, DcMotorEx liftRight){
         leftFront = lf;
         leftRear = lr;
@@ -81,22 +80,14 @@ public class BotCore {
         this.magArm = new MagArm(magArm, magRemoval);
         this.duckSpinner = new DuckSpinner(spinner);
 
-        //this.intake = new Intake(intake);
 
-        //duckSpinner = new DuckSpinner(spinner);
-        /*
-        magArm = new MagArm(map.get(Servo.class, "magArm"), map.get(Servo.class, "magRemoval"));
-
-        lift = new Lift(map.get(DcMotorEx.class, "liftLeft"), map.get(DcMotorEx.class, "liftRight"), map.get(Servo.class, "liftServo"));
-        */
-        //IMU initialization
 
 
 
 
     }
     // this one just uses motors
-    public BotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr){
+    public SliderBotCore(DcMotorEx lf, DcMotorEx rf, DcMotorEx lr, DcMotorEx rr){
         leftFront = lf;
         leftRear = lr;
         rightFront = rf;

@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.v2.auto.odometry;
 import org.firstinspires.ftc.teamcode.v2.advent.field.Point;
 import org.firstinspires.ftc.teamcode.v2.advent.field.Vector;
 import org.firstinspires.ftc.teamcode.v2.core.BotCore;
+import static org.firstinspires.ftc.teamcode.v2.DATA.*;
 
 public class OdometryCore {
     protected Point currentPos;
@@ -44,9 +45,23 @@ public class OdometryCore {
 
 
 
-    public void computeNewPos(double wheelXDelta, double wheelYDelta, double heading){
-        double totalDelta = Math.sqrt(Math.pow(wheelXDelta, 2) + Math.pow(wheelYDelta, 2));
-        Vector movement = new Vector(currentPos, totalDelta, heading);
+    public void computeNewPos(){
+        odoBot.update();
+
+        double x = odoBot.getDeltaXWheel();
+        double y = odoBot.getDeltaYWheel();
+        double headingDelta = odoBot.getDeltaHeading();
+
+        //account for rotation
+        x -= ROTATIONAL_CONSTANT_X*(headingDelta/(2*Math.PI));
+        y -= ROTATIONAL_CONSTANT_Y*(headingDelta/(2*Math.PI));
+
+        double totalDelta = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+
+
+        Vector movement = new Vector(currentPos, totalDelta, odoBot.heading);
+
+
 
         currentPos = movement.endPoint;
 

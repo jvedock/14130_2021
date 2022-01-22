@@ -11,8 +11,10 @@ import org.firstinspires.ftc.teamcode.v2.gamepadEx.GamepadEx;
 public class CompetitionOpmodeFive extends LinearOpMode {
     String status = "";
     BotCore bot;
-    double liftDown = 290;
-    double liftup = 180;
+    final double liftDown = 295;
+    final double liftMiddle = 130;
+    final double liftUp = 180;
+    final double liftLow = 80;
 
     public void runOpMode(){
         bot = new BotCore(hardwareMap);
@@ -34,15 +36,7 @@ public class CompetitionOpmodeFive extends LinearOpMode {
                     (float) gamepad1.right_stick_x);
 
 
-            if(gamepad1.left_bumper){
-                bot.duckSpinner.setPower(-1);
-            }
-            else if (gamepad1.right_bumper){
-                bot.duckSpinner.setPower(1);
-            }
-            else{
-                bot.duckSpinner.setPower(0);
-            }
+            bot.duckSpinner.setPower(gamepad2.right_trigger-gamepad2.left_trigger);
 
             bot.intake.setPower(gamepad1.left_trigger-gamepad1.right_trigger);
 
@@ -82,11 +76,23 @@ public class CompetitionOpmodeFive extends LinearOpMode {
                 bot.lift.pid.setTarget((bot.lift.pid.getTarget())-0.5);
             }
 
-            if(gamepad2.a){
-                bot.lift.pid.setTarget(liftup);
+            if(gamepad2.dpad_up){
+                bot.lift.pid.setTarget(liftUp);
             }
-            else if(gamepad2.b){
+            else if(gamepad2.dpad_down){
+                bot.lift.pid.setTarget(liftLow);
+            }
+            else if(gamepad2.dpad_left){
+                bot.lift.pid.setTarget(liftMiddle);
+            }
+            else if(gamepad2.dpad_right){
                 bot.lift.pid.setTarget(liftDown);
+            }
+            else if(gamepad2.left_bumper){
+                bot.lift.pid.setTarget(bot.lift.pid.getTarget()-0.2);
+            }
+            else if(gamepad2.right_bumper){
+                bot.lift.pid.setTarget(bot.lift.pid.getTarget()+0.2);
             }
 
 

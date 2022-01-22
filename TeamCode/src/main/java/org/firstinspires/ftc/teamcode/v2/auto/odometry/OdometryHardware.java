@@ -24,7 +24,7 @@ public class OdometryHardware {
     }
 
     private double getHeading(){
-        return 0;//formatAngle(angles.angleUnit, angles.firstAngle);;
+        return Math.toRadians(0);//formatAngle(angles.angleUnit, angles.firstAngle);;
     }
 
     private double getXWheelPosition(){
@@ -41,6 +41,9 @@ public class OdometryHardware {
     }
     public double getDeltaYWheel(){
         return getYWheelPosition()- prevYWheel;
+    }
+    public double getDeltaHeading(){
+        return heading-prevHeading;
     }
 
     public void update(){
