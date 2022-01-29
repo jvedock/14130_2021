@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.v2.teleops;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
 import org.firstinspires.ftc.teamcode.v2.core.BotCore;
-
+@Disabled
 @TeleOp(name="Telemetry Test", group = "default")
 public class TelemetryTest extends LinearOpMode {
 

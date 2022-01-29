@@ -1,12 +1,15 @@
 package org.firstinspires.ftc.teamcode.v2.teleops;
 
+import androidx.core.app.RemoteInput;
+
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.GamepadEx;
 
-
+@Disabled
 @TeleOp (name="Mk1", group = "default")
 public class CompetitionOpmodeFive extends LinearOpMode {
     String status = "";

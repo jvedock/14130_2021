@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 import org.firstinspires.ftc.teamcode.v2.core.SliderBotCore;
 
 
-@TeleOp(name="Automatic Test", group="Tests")
-public class AutomaticTest extends LinearOpMode {
+@TeleOp(name="better Automatic Test", group="Tests")
+public class BetterAuto extends LinearOpMode {
     boolean done = false;
     SliderBotCore bot;
     Orientation angles;
@@ -89,25 +89,25 @@ public class AutomaticTest extends LinearOpMode {
     }
 
     public void cycle(){
-        move(90, 36, 0.5);
+        move(90, 36, 0.6);
 
         bot.intake.setPower(1);
-        move(90, 4, 0.1);
+        move(90, 4, 0.15);
         //move(270, 4, 0.2);
 
 
 
 
         bot.intake.setPower(-1);
-        move(0, 5, 0.6);
+        move(0, 5, 0.8);
 
         move(270, 20, 0.35);
 
         bot.intake.setPower(0);
 
-        move(270, 20, 0.5);
+        move(270, 20, 0.6);
 
-        move(0, 5, 0.1);
+        move(0, 5, 0.4);
 
         cycleSlide();
     }
@@ -136,7 +136,7 @@ public class AutomaticTest extends LinearOpMode {
         leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        
+
         if(angle == 0){
             leftFront.setTargetPosition(clicks);
             leftRear.setTargetPosition(-clicks);

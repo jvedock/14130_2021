@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 public class MovementTest1 {
 
-
+    /*
 
     BotCore core = MockBotFactory.getMockBot();
     @Test
@@ -95,7 +95,7 @@ public class MovementTest1 {
     }
 
 
-
+*/
 
 
 

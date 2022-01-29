@@ -10,10 +10,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import static org.firstinspires.ftc.teamcode.v2.DATA.*;
 
+import org.checkerframework.checker.units.qual.C;
+import org.firstinspires.ftc.teamcode.v2.core.components.Capstone;
 import org.firstinspires.ftc.teamcode.v2.core.components.DuckSpinner;
 import org.firstinspires.ftc.teamcode.v2.core.components.Intake;
 import org.firstinspires.ftc.teamcode.v2.core.components.Lift;
 import org.firstinspires.ftc.teamcode.v2.core.components.MagArm;
+import org.firstinspires.ftc.teamcode.v2.core.components.Slider;
 import org.firstinspires.ftc.teamcode.v2.core.components.SliderIntake;
 
 public class SliderBotCore {
@@ -29,12 +32,14 @@ public class SliderBotCore {
     //IMU sensor
     public BNO055IMU imu;
 
+    public Capstone capstone;
 
-
+    public Slider slider;
 
     public SliderIntake intake;
     public DuckSpinner duckSpinner;
     public MagArm magArm;
+
 
 
     public Servo odoUp;
@@ -50,12 +55,14 @@ public class SliderBotCore {
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        intake = new SliderIntake(map.get(DcMotorEx.class, "intakeOne"), map.get(DcMotorEx.class, "intakeTwo"));
+        intake = new SliderIntake(map.get(DcMotorEx.class, "intake1"), map.get(DcMotorEx.class, "intake2"));
 
+        slider = new Slider(map.get(DcMotorEx.class, "sliderMotor1"), map.get( DcMotorEx.class, "sliderMotor2"),
+                map.get(Servo.class, "drop"));
 
         //duckSpinner = new DuckSpinner(map.get(DcMotorEx.class, "duckSpinner"));
 
-
+        capstone = new Capstone(map.get(Servo.class, "capStone"));
 
         //odoUp = map.get(Servo.class, "odoServo");
 
@@ -154,29 +161,38 @@ public class SliderBotCore {
         mod = 1;
         lf_rrPow *= mod;
         lr_rfPow *= mod;
-
+        lf_rrPow = Math.pow(lf_rrPow, 2);
+        lr_rfPow = Math.pow(lr_rfPow, 2);
         leftFront.setPower(lf_rrPow);
         rightRear.setPower(lf_rrPow);
         rightFront.setPower(lr_rfPow);
         leftRear.setPower(lr_rfPow);
     }
 
-    public void move(double angle, double distance, double magnitude){
+    public int autoMove(double angle, double distance, double magnitude){
+
+
         double[][] results = getMovement(angle, distance, magnitude);
 
-        int lf_rrClicks =(int) results[0][1];
+        int lf_rrClicks =(int) (results[0][1]+0.5);
 
-        int lr_rfClicks =(int) results[1][1];
+        int lr_rfClicks =(int) (results[1][1]+0.5);
 
-        int lf_rrPow =(int) results[0][0];
+        double lf_rrPow = (results[0][0]);
 
-        int lr_rfPow =(int) results[1][0];
+        double lr_rfPow = (results[1][0]);
+
 
 
         leftFront.setTargetPosition(leftFront.getCurrentPosition()+lf_rrClicks);
         rightRear.setTargetPosition(rightRear.getCurrentPosition()+lf_rrClicks);
         leftRear.setTargetPosition(leftRear.getCurrentPosition()+lr_rfClicks);
         rightFront.setTargetPosition(rightFront.getCurrentPosition()+lr_rfClicks);
+
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -188,7 +204,22 @@ public class SliderBotCore {
         leftRear.setPower(lr_rfPow);
         rightFront.setPower(lr_rfPow);
 
-        while(leftFront.isBusy() || rightFront.isBusy()){
+
+        while(leftFront.isBusy() ||
+                rightFront.isBusy() || leftRear.isBusy() || rightRear.isBusy()){
+
+            double speedMod = (trapazoid(rightFront.getCurrentPosition()/rightFront.getTargetPosition(),
+                    0.05, 0.2));
+            /*
+            rightFront.setPower(lr_rfPow*speedMod);
+            rightRear.setPower(lf_rrPow*speedMod);
+            leftRear.setPower(lr_rfPow*speedMod);
+            leftFront.setPower(lf_rrPow*speedMod);
+
+
+             */
+
+
 
         }
 
@@ -203,6 +234,7 @@ public class SliderBotCore {
         leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        return 0;
     }
 
     /**
@@ -220,15 +252,19 @@ public class SliderBotCore {
         double[][] result = new double[4][2];
         angle = Math.toRadians(angle);
 
-        double mainClicks = mmToClicks(distance);
+        int mainClicks = (int) (mmToClicks(distance)*(25/16)*(1000/64));
         double lf_rrMod = Math.sin(angle+(1*Math.PI/4));
         double lr_rfMod = Math.sin(angle-(1*Math.PI/4));
+
+        double mod = Math.abs(1/Math.max(lf_rrMod, lr_rfMod));
+        lf_rrMod *= mod;
+        lr_rfMod *= mod;
 
         int lf_rrClicks = (int)(mainClicks*lf_rrMod);
         int lr_rfClicks = (int)(mainClicks*lr_rfMod);
 
-        double lf_rrPow = lf_rrMod;
-        double lr_rfPow = lr_rfMod;
+        double lf_rrPow = lf_rrMod*magnitude;
+        double lr_rfPow = lr_rfMod*magnitude;
 
         result[0][0] = lf_rrPow;
         result[1][0] = lr_rfPow;
@@ -252,12 +288,24 @@ public class SliderBotCore {
         odoUp.setPosition(pos);
     }
 
-    private double mmToClicks(double mm){
-        return (mm/CIRCUMFERENCE)*CLICKS_PER_ROTATION;
+    public static double mmToClicks(double mm){
+        return ((mm/CIRCUMFERENCE)*CLICKS_PER_ROTATION);
     }
 
 
+    public static double trapazoid(double in, double offset, double accelInterval){
 
+        double val;
+        if(in<accelInterval){
+            return Math.max(Math.min(1, (in*accelInterval)+offset), offset);
+        }
+        else if(in>1-accelInterval){
+            return Math.max(Math.min(1, 1-(in/accelInterval)+offset), offset);
+        }
+        else{
+            return 1;
+        }
+    }
 
 
 

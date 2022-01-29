@@ -16,7 +16,7 @@ public class MockBotFactory {
 
         MockDcMotorEx intake = new MockDcMotorEx();
 
-        MockCRServo spinner = new MockCRServo();
+        MockDcMotorEx spinner = new MockDcMotorEx();
 
         MockServo magArm = new MockServo();
         MockServo magRemoval = new MockServo();
