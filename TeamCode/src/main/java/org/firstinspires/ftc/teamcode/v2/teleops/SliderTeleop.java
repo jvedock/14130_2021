@@ -39,7 +39,7 @@ public class SliderTeleop extends LinearOpMode {
 
             slider.sliderUpdate();
             telemetry.addData("Pos", slider.sliderMotor1.getCurrentPosition());
-            telemetry.addData("Pos Target", slider.pid.getTarget());
+            telemetry.addData("Pos Target", slider.p.getTarget());
             telemetry.addData("Motor 1 Pow", slider.sliderMotor1.getPower());
             telemetry.addData("Motor 2 Pow", slider.sliderMotor2.getPower());
             telemetry.update();

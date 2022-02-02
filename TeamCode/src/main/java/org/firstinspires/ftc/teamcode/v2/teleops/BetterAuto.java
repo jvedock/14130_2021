@@ -10,11 +10,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.teamcode.v2.States.SliderState;
 import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 import org.firstinspires.ftc.teamcode.v2.core.SliderBotCore;
 
 
-@TeleOp(name="better Automatic Test", group="Tests")
+@TeleOp(name="1 Block Auto", group="Tests")
 public class BetterAuto extends LinearOpMode {
     boolean done = false;
     SliderBotCore bot;
@@ -45,10 +46,10 @@ public class BetterAuto extends LinearOpMode {
 
 
         waitForStart();
+
         bot.slider.closeLift();
         cycleSlide();
-        cycle();
-        cycle();
+
 
 
         /*
@@ -81,15 +82,27 @@ public class BetterAuto extends LinearOpMode {
 
     public void cycleSlide(){
         bot.slider.extend(1);
-        sleep(1600);
+        while(bot.slider.p.target-bot.slider.sliderMotor1.getCurrentPosition()>200){
+            bot.slider.running();
+        }
+        sleep(700);
         bot.slider.openLift();
-        sleep(500);
+        sleep(400);
         bot.slider.closeLift();
-        bot.slider.extend(0);
+
+
+        bot.slider.sliderMotor1.setPower(-0.6);
+        bot.slider.sliderMotor2.setPower(-0.6);
+
+        while(bot.slider.sliderMotor1.getCurrentPosition()>5){
+
+        }
+        bot.slider.sliderMotor1.setPower(0);
+        bot.slider.sliderMotor2.setPower(0);
     }
 
     public void cycle(){
-        move(90, 36, 0.6);
+        move(90, 36, 0.7);
 
         bot.intake.setPower(1);
         move(90, 4, 0.15);
@@ -101,13 +114,13 @@ public class BetterAuto extends LinearOpMode {
         bot.intake.setPower(-1);
         move(0, 5, 0.8);
 
-        move(270, 20, 0.35);
+        move(270, 20, 0.3);
 
         bot.intake.setPower(0);
 
-        move(270, 20, 0.6);
+        move(270, 19, 0.6);
 
-        move(0, 5, 0.4);
+        move(0, 5, 0.7);
 
         cycleSlide();
     }

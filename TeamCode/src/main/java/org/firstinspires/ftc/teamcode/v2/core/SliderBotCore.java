@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode.v2.core;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.hardware.AnalogInput;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -10,12 +8,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import static org.firstinspires.ftc.teamcode.v2.DATA.*;
 
-import org.checkerframework.checker.units.qual.C;
+import org.firstinspires.ftc.teamcode.v2.States.SliderState;
 import org.firstinspires.ftc.teamcode.v2.core.components.Capstone;
 import org.firstinspires.ftc.teamcode.v2.core.components.DuckSpinner;
-import org.firstinspires.ftc.teamcode.v2.core.components.Intake;
-import org.firstinspires.ftc.teamcode.v2.core.components.Lift;
 import org.firstinspires.ftc.teamcode.v2.core.components.MagArm;
+import org.firstinspires.ftc.teamcode.v2.core.components.OdoInterface;
+import org.firstinspires.ftc.teamcode.v2.core.components.OdoMovment;
 import org.firstinspires.ftc.teamcode.v2.core.components.Slider;
 import org.firstinspires.ftc.teamcode.v2.core.components.SliderIntake;
 
@@ -40,7 +38,9 @@ public class SliderBotCore {
     public DuckSpinner duckSpinner;
     public MagArm magArm;
 
+    public OdoInterface odoCore;
 
+    public OdoMovment odoMove;
 
     public Servo odoUp;
 
@@ -60,11 +60,11 @@ public class SliderBotCore {
         slider = new Slider(map.get(DcMotorEx.class, "sliderMotor1"), map.get( DcMotorEx.class, "sliderMotor2"),
                 map.get(Servo.class, "drop"));
 
-        //duckSpinner = new DuckSpinner(map.get(DcMotorEx.class, "duckSpinner"));
+        odoCore = new OdoInterface(map.get(DcMotorEx.class, "intake1"), map.get(DcMotorEx.class, "intake2"));
 
         capstone = new Capstone(map.get(Servo.class, "capStone"));
 
-        //odoUp = map.get(Servo.class, "odoServo");
+        odoMove = new OdoMovment(this);
 
         //IMU initialization
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -73,6 +73,7 @@ public class SliderBotCore {
 
         imu = map.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
+
 
 
     }
@@ -161,8 +162,8 @@ public class SliderBotCore {
         mod = 1;
         lf_rrPow *= mod;
         lr_rfPow *= mod;
-        lf_rrPow = Math.pow(lf_rrPow, 2);
-        lr_rfPow = Math.pow(lr_rfPow, 2);
+        lf_rrPow = Math.pow(lf_rrPow, 2)*magnitude;
+        lr_rfPow = Math.pow(lr_rfPow, 2)*magnitude;
         leftFront.setPower(lf_rrPow);
         rightRear.setPower(lf_rrPow);
         rightFront.setPower(lr_rfPow);
@@ -306,6 +307,13 @@ public class SliderBotCore {
             return 1;
         }
     }
+
+    public void tearDown(){
+        slider.setState(SliderState.END);
+
+    }
+
+
 
 
 

@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.v2.teleops;
 
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.BooleanButtons;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.GamepadEx;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.StandardButtonTypes;
-
+@Disabled
 @TeleOp(name = "gamepadEx Test", group = "default")
 public class GamepadExTest extends LinearOpMode {
 

@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.v2.core.components;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Capstone {
-    private double up = 0;
-    private double down = 1;
+    private double up = 0.5;
+    private double down = 0.95;
     private double in = 0;
 
     private Servo servo;

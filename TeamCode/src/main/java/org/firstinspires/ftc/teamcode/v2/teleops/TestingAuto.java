@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.v2.teleops;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 import org.firstinspires.ftc.teamcode.v2.core.SliderBotCore;
 
-
+@Disabled
 @TeleOp(name="testing", group="Tests")
 public class TestingAuto extends LinearOpMode {
     boolean done = false;
@@ -48,9 +49,9 @@ public class TestingAuto extends LinearOpMode {
 
     public void cycleSlide(){
         bot.slider.extend(1);
-        sleep(1500);
-        bot.slider.openLift();
         sleep(500);
+        bot.slider.openLift();
+        sleep(400);
         bot.slider.closeLift();
         bot.slider.extend(0);
     }

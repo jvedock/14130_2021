@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
+import org.firstinspires.ftc.teamcode.v2.States.SliderState;
 import org.firstinspires.ftc.teamcode.v2.core.SliderBotCore;
 import org.firstinspires.ftc.teamcode.v2.core.components.Slider;
 import org.firstinspires.ftc.teamcode.v2.core.components.SliderIntake;
+
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.BooleanButtons;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.GamepadEx;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.StandardButtonTypes;
@@ -20,8 +22,10 @@ public class SliderBotCompetition extends LinearOpMode {
         GamepadEx gamepadEx2 = new GamepadEx(gamepad2);
         gamepadEx1.setButtonMode(BooleanButtons.x, StandardButtonTypes.TOGGLE);
         SliderBotCore bot = new SliderBotCore(hardwareMap);
+        waitForStart();
         while(opModeIsActive()){
-
+            bot.slider.setState(SliderState.RUNNING);
+            bot.slider.start();
             if(!gamepad1.left_bumper) {
                 bot.move((Math.atan2(-gamepadEx1.left_stick_y(), gamepadEx1.left_stick_x()))
                         , Math.sqrt(Math.pow(gamepadEx1.left_stick_y(), 2) + Math.pow(gamepadEx1.left_stick_x(), 2)),
@@ -50,24 +54,25 @@ public class SliderBotCompetition extends LinearOpMode {
                 bot.slider.closeLift();
             }
 
-            if(gamepadEx1.dpad_down()){
+            if(gamepad1.dpad_down){
                 bot.capstone.down();
             }
-            else if(gamepadEx1.dpad_right()){
+            else if(gamepad1.dpad_right){
                 bot.capstone.in();
             }
-            else if(gamepadEx1.dpad_up()){
+            else if(gamepad1.dpad_up){
                 bot.capstone.up();
             }
 
 
-
             bot.intake.setPower((gamepad1.right_trigger-gamepad1.left_trigger)+(gamepad2.right_trigger-gamepad2.left_trigger));
-            telemetry.addData("target", bot.slider.sliderMotor1.getTargetPosition());
-            telemetry.addData("Actual", bot.slider.sliderMotor1.getCurrentPosition());
-            telemetry.addData("Motor 1 Pow", bot.slider.sliderMotor1.getPower());
+
+
+
             telemetry.update();
         }
+
+        bot.tearDown();
 
     }
 }

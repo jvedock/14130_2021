@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.teamcode.v2.States.SliderState;
 import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 import org.firstinspires.ftc.teamcode.v2.core.SliderBotCore;
 
@@ -45,6 +46,7 @@ public class AutomaticTest extends LinearOpMode {
 
 
         waitForStart();
+
         bot.slider.closeLift();
         cycleSlide();
         cycle();
@@ -81,38 +83,50 @@ public class AutomaticTest extends LinearOpMode {
 
     public void cycleSlide(){
         bot.slider.extend(1);
-        sleep(1600);
+        while(bot.slider.p.target-bot.slider.sliderMotor1.getCurrentPosition()>200){
+            bot.slider.running();
+        }
+        sleep(700);
         bot.slider.openLift();
-        sleep(500);
+        sleep(400);
         bot.slider.closeLift();
-        bot.slider.extend(0);
+
+
+        bot.slider.sliderMotor1.setPower(-0.6);
+        bot.slider.sliderMotor2.setPower(-0.6);
+
+        while(bot.slider.sliderMotor1.getCurrentPosition()>4){
+
+        }
+        bot.slider.sliderMotor1.setPower(0);
+        bot.slider.sliderMotor2.setPower(0);
     }
 
     public void cycle(){
-        move(90, 36, 0.5);
+        move(90, 36, 0.7);
 
         bot.intake.setPower(1);
-        move(90, 4, 0.1);
+        move(90, 5, 0.15);
         //move(270, 4, 0.2);
 
 
 
 
         bot.intake.setPower(-1);
-        move(0, 5, 0.6);
+        move(0, 6, 0.8);
 
-        move(270, 20, 0.35);
+        move(270, 20, 0.3);
 
         bot.intake.setPower(0);
 
-        move(270, 20, 0.5);
+        move(270, 20.5, 0.5);
 
-        move(0, 5, 0.1);
+        move(0, 7.5, 0.7);
 
         cycleSlide();
     }
 
-
+ 
     public void move(double angle, double distance, double mag){
         DcMotorEx leftFront = bot.leftFront;
         DcMotorEx leftRear = bot.leftRear;

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.v2.teleops;
 
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -8,7 +9,7 @@ import org.firstinspires.ftc.teamcode.v2.core.BotCore;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.BooleanButtons;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.GamepadEx;
 import org.firstinspires.ftc.teamcode.v2.gamepadEx.StandardButtonTypes;
-
+@Disabled
 @TeleOp(name = "Driving test", group = "default")
 public class DriveTest extends LinearOpMode {
     //GamepadEx gamepadEx1 = new GamepadEx(gamepad1);
